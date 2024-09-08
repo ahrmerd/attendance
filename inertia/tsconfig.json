@@ -5,9 +5,14 @@
     "module": "ESNext",
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
       // "@/*": ["./inertia/*"],
     }
   },
-  "include": ["./**/*.ts", "./**/*.tsx"]
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx"
+  ]
 }

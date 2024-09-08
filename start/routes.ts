@@ -12,6 +12,9 @@ const RegisterUsersController = () => import('#controllers/register_users_contro
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const ClassesController = () => import('#controllers/classes_controller')
+// import StudentsController from 'app/controllers/students_controller.js'
+const StudentsController = () => import('#controllers/students_controller')
 const RolesController = () => import('#controllers/roles_controller')
 const UsersController = () => import('#controllers/users_controller')
 const SchoolsController = () => import('#controllers/schools_controller')
@@ -30,6 +33,11 @@ router
     // router.get('/dashboard', )
   })
   .middleware(middleware.guest())
+  router.group(()=>{
+    router.on('/myschool').renderInertia('myschool/my_school_dashboard').as('myschool')
+    router.resource('/classes', ClassesController).as('classes')
+    router.resource('/students', StudentsController).as('students')
+  }).middleware(middleware.schoolAuth());
 router
   .group(() => {
     router.on('not-school').renderInertia('not_school').as('notSchool')

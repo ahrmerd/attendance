@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Link, router, usePage } from '@inertiajs/react'
-import { Telescope, SchoolIcon, MenuIcon, XIcon } from 'lucide-react'
+import { TelescopeIcon, SchoolIcon, MenuIcon, XIcon } from 'lucide-react'
 import {
   DropdownMenuTrigger,
   DropdownMenuLabel,
@@ -12,14 +12,16 @@ import {
 import { SheetTrigger, SheetContent, Sheet } from '@/components/ui/sheet'
 import { UserAvatar } from '@/components/icons'
 import { Sidebar } from '@/components/sidebar'
-import { ReactNode } from 'react'
+import { ReactNode, useContext } from 'react'
 import User from '#models/user'
+import { useTheme, ThemeToggle } from '@/contexts/theme_context'
 
 interface AdminLayoutProps {
   children: ReactNode
 }
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const user: User = usePage().props.auth as User
+  const theme = useTheme()
   // const [isSidebarExpanded, setIsSidebarExpanded] = useState(false)
 
   return (
@@ -60,6 +62,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 <Link href="l">Profile</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem>
+                <ThemeToggle/>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link href="logout" method="post" as="button">
