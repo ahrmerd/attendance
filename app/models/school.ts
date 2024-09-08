@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import Role from '#models/role'
+import Class from '#models/class'
 
 export default class School extends BaseModel {
   @column({ isPrimary: true })
@@ -21,6 +22,9 @@ export default class School extends BaseModel {
 
   @column()
   declare status: 'active' | 'inactive'
+
+  @hasMany(()=>Class)
+  declare class: HasMany<typeof Class>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
