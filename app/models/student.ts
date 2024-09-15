@@ -33,6 +33,12 @@ export default class Student extends BaseModel {
   @column()
   declare status: 'active' | 'inactive'
 
+  @column()
+  declare finger1: Buffer
+
+  @column()
+  declare finger2: Buffer
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

@@ -16,6 +16,10 @@ export default class Class extends BaseModel {
   declare name: string
 
   @column()
+  declare status: 'active' | 'inactive'
+
+
+  @column()
   declare teacherId: number
   
   @belongsTo(()=> School)

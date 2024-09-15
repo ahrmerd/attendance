@@ -12,12 +12,16 @@ const RegisterUsersController = () => import('#controllers/register_users_contro
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import User from '#models/user'
+// import AttendancesController from 'app/controllers/attendances_controller.js'
 const ClassesController = () => import('#controllers/classes_controller')
 // import StudentsController from 'app/controllers/students_controller.js'
 const StudentsController = () => import('#controllers/students_controller')
 const RolesController = () => import('#controllers/roles_controller')
 const UsersController = () => import('#controllers/users_controller')
 const SchoolsController = () => import('#controllers/schools_controller')
+const AttendancesController = () => import('#controllers/attendances_controller')
+const SchoolRoleController = () => import('#controllers/school_roles_controller')
 
 router.on('/').renderInertia('home', { version: 6 }).as('home')
 // router.on('/').renderInertia('admin/dashboard', { version: 6 }).as('home-dash')
@@ -33,13 +37,20 @@ router
     // router.get('/dashboard', )
   })
   .middleware(middleware.guest())
+
   router.group(()=>{
-    router.on('/myschool').renderInertia('myschool/my_school_dashboard').as('myschool')
-    router.resource('/classes', ClassesController).as('classes')
-    router.resource('/students', StudentsController).as('students')
+    router.on('/myschools').renderInertia('myschools/my_school_dashboard').as('myschools')
+    router.resource('/myschools/classes', ClassesController).as('classes')
+    router.resource('/myschools/students', StudentsController).as('students')
+    router.get('/myschools/classes/:id/attendances', [AttendancesController, 'index']).as('attendances.index')
+    router.resource('/myschools/roles', SchoolRoleController).as('school_role')
+    //roles for schools
+    //attendance
+    // router.resource('/myschools/students', StudentsController).as('students')
   }).middleware(middleware.schoolAuth());
+
 router
-  .group(() => {
+.group(() => {User
     router.on('not-school').renderInertia('not_school').as('notSchool')
     router.on('not-admin').renderInertia('not_admin').as('notAdmin')
     router.post('/logout', [LoginUsersController, 'logout']).as('logout')
