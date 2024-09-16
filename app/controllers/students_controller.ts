@@ -32,15 +32,7 @@ export default class StudentsController {
     
     async classStudents({ inertia, request, params, auth }: HttpContext) {
         
-        // const student = await Student.create({schoolId: 1, 
-        //     classId: 1, 
-        //     firstName: 'John',
-        //     lastName: 'kkkk',
-        //     finger1:  Buffer.from('sdsds'),
-        //     finger2:  Buffer.from('sdsds'),
-        //     dateOfBirth: '22-03-655',
-        //     primaryContact: '22-03-655'
-        // })
+        // 
         const classId = params.id
         const page = request.input('page', 1)
         const search = request.input('search')
