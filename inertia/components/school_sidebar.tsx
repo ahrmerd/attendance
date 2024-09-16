@@ -10,27 +10,32 @@ import { useState } from 'react'
 
 const navItems = [
   {
-    routeName: 'myschool',
+    routeName: '/myschools',
     label: 'Dashboard',
     icon: <LayoutDashboardIcon />,
   },
   {
-    routeName: 'students',
+    routeName: '/myschools/students',
     label: 'Students',
     icon: <UsersIcon />,
   },
   {
-    routeName: 'users',
-    label: 'Users',
+    routeName: '/myschools/roles',
+    label: 'Teachers & Admins',
     icon: <UsersIcon />,
   },
+  // {
+  //   routeName: 'users',
+  //   label: 'Users',
+  //   icon: <UsersIcon />,
+  // },
+  // {
+  //   routeName: 'roles',
+  //   label: 'Roles',
+  //   icon: <PlayIcon />,
+  // },
   {
-    routeName: 'roles',
-    label: 'Roles',
-    icon: <PlayIcon />,
-  },
-  {
-    routeName: 'classes',
+    routeName: '/myschools/classes',
     label: 'Classes',
     icon: <SchoolIcon />,
   },

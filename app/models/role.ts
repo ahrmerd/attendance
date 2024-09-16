@@ -15,6 +15,9 @@ export default class Role extends BaseModel {
   declare role: 'admin' | 'teacher'
 
   @column()
+  declare status: 'active' | 'inactive'
+
+  @column()
   declare schoolId: number
 
   @column.dateTime({ autoCreate: true })

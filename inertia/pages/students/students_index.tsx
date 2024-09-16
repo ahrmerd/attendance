@@ -19,6 +19,7 @@ import PaginationComponent from '@/components/pagination_component'
 import { debounce } from 'lodash'
 import { Input } from '@/components/ui/input'
 import CreateStudentModal from '@/components/modals/create_student_modal'
+import SchoolLayout from '@/layouts/school_layout'
 
 
 export default function StudentIndex(props: InferPageProps<StudentsController, 'index'>) {
@@ -61,7 +62,7 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
   //   []
   // )
   const debouncedGet = debounce(() => {
-    get(`/students?`, {
+    get(`/myschools/students?`, {
       preserveState: true,
       preserveScroll: true,
       only: ['students'],
@@ -82,12 +83,9 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
   return (
     <>
       <Head title="Students" />
-      <AdminLayout>
+      <SchoolLayout>
         <div className="container p-4 mx-auto">
           <h1 className="mb-4 text-2xl font-bold">Students List</h1>
-          <Button className="mb-4" onClick={() => setIsModalOpen(true)}>
-            Add New Student
-          </Button>
           <Input
             type="text"
             placeholder="Search Student..."
@@ -132,11 +130,11 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
             </TableBody>
           </Table>
           <PaginationComponent paginationData={props.students.meta} baseRoute="/students" />
-          <CreateStudentModal
+          {/* <CreateStudentModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
             // onSubmit={handleAddUser}
-          />
+          /> */}
           {/* {editingUser && (
             <EditUserModal
               student={editingUser}
@@ -149,7 +147,7 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
           )} */}
          
         </div>
-      </AdminLayout>
+      </SchoolLayout>
     </>
   )
 }

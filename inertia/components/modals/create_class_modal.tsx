@@ -18,14 +18,14 @@ import {
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { convertToCapitalizedWords } from '@/lib/utils';
-import User from '#models/user';
+import Role from '#models/role';
 import School from '#models/school';
 
 interface CreateClassModalProps {
   isOpen: boolean;
   onClose: () => void;
   schools: School[];
-  teachers: User[];
+  teachers: Role[];
 }
 
 export default function CreateClassModal({ isOpen, onClose, schools, teachers }: CreateClassModalProps) {
@@ -36,9 +36,11 @@ export default function CreateClassModal({ isOpen, onClose, schools, teachers }:
   });
 console.log(teachers);
 
+const schoolTeachers = teachers.filter(teacher=>teacher.schoolId== parseInt(data.schoolId));
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    post('/classes', {
+    post('/myschools/classes', {
       preserveState: true,
       preserveScroll: true,
       onSuccess: () => {
@@ -88,14 +90,14 @@ console.log(teachers);
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="teacherId">Teacher</Label>
-              <Select value={data.teacherId} onValueChange={(value) => setData('teacherId', value)}>
+              <Select disabled={schoolTeachers.length==0} value={data.teacherId} onValueChange={(value) => setData('teacherId', value)}>
                 <SelectTrigger id="teacherId">
                   <SelectValue placeholder="Select a teacher" />
                 </SelectTrigger>
                 <SelectContent>
-                  {teachers.map((teacher) => (
-                    <SelectItem key={teacher.id} value={teacher.id.toString()}>
-                      {teacher.fullName}
+                  { schoolTeachers.map((teacher) => (
+                    <SelectItem key={teacher.user.id} value={teacher.user.id.toString()}>
+                      {teacher.user.fullName}
                     </SelectItem>
                   ))}
                 </SelectContent>

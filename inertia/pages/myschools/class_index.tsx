@@ -1,6 +1,6 @@
 import { InferPageProps } from "@adonisjs/inertia/types"
 import ClassesController from "#controllers/classes_controller"
-import { Head } from "@inertiajs/react"
+import { Head, Link } from "@inertiajs/react"
 import SchoolLayout from "@/layouts/school_layout"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
@@ -9,6 +9,7 @@ import { useState } from "react"
 import School from "#models/school"
 import User from "#models/user"
 import Class from "#models/class"
+import Role from "#models/role"
 
 type ClassWithRelations = Class & {
   school: School
@@ -50,13 +51,27 @@ export default function ClassIndex(props: InferPageProps<ClassesController, 'ind
                   <TableCell>
                     <Button variant="outline" size="sm">Edit</Button>
                   </TableCell>
+                  <TableCell>
+                    <Button variant="outline" size="sm">
+                      <Link href={`/myschools/classes/${classItem.id}/attendances`}>
+                        View Attendance
+                      </Link>
+                    </Button>
+                  </TableCell>
+                  <TableCell >
+                    <Button  variant="outline" size="sm"> 
+                    <Link href={`/myschools/classes/${classItem.id}/students`}>
+                    View Students
+                    </Link>
+                    </Button>
+                    </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
           <CreateClassModal
             schools={props.schools as School[]}
-            teachers={props.users as User[]}
+            teachers={props.schoolTeachers as Role[]}
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
             // onSubmit={handleAddRole}

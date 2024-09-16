@@ -11,6 +11,8 @@ export default class extends BaseSchema {
       table.integer('class_id').unsigned().references('id').inTable('classes').onDelete('SET NULL')
       table.string('first_name', 50).notNullable()
       table.string('last_name', 50).notNullable()
+      table.binary('finger_1').notNullable()
+      table.binary('finger_2').notNullable()
       table.date('date_of_birth').notNullable()
       table.string('primary_contact', 20).notNullable()
 
