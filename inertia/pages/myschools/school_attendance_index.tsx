@@ -1,29 +1,47 @@
+import { useState, useEffect } from 'react'
 import { InferPageProps } from "@adonisjs/inertia/types"
 import AttendancesController from "#controllers/attendances_controller"
-import { Head, Link } from "@inertiajs/react"
+import { Head, useForm } from "@inertiajs/react"
 import SchoolLayout from "@/layouts/school_layout"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import Attendance from "#models/attendance"
 import Student from "#models/student"
 import Class from "#models/class"
 import { DateTime } from "luxon"
+import PaginationComponent from "@/components/pagination_component"
+import { debounce } from 'lodash'
 
 type AttendanceWithRelations = Attendance & {
   student: Student
   class: Class
 }
 
-export default function AttendanceIndex({ attendances }: InferPageProps<AttendancesController, 'index'>) {
-  const [searchTerm, setSearchTerm] = useState("")
-  console.log(attendances);
-  
+export default function AttendanceIndex({ attendances, classId }: InferPageProps<AttendancesController, 'index'>) {
   const attendanceData = attendances.data as AttendanceWithRelations[]
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value)
+
+  const { data, setData, get } = useForm({
+    search: '',
+    page: attendances.meta.currentPage,
+  });
+
+  const debouncedGet = debounce(() => {
+    get(`/myschools/classes/${classId}/attendances`, {
+      preserveState: true,
+      preserveScroll: true,
+      only: ['attendances'],
+    })
+  }, 300)
+
+  useEffect(() => {
+    debouncedGet()
+    return debouncedGet.cancel
+  }, [data.search])
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData('search', e.target.value)
   }
 
   return (
@@ -37,10 +55,9 @@ export default function AttendanceIndex({ attendances }: InferPageProps<Attendan
               <Input
                 type="text"
                 placeholder="Search students..."
-                value={searchTerm}
+                value={data.search}
                 onChange={handleSearch}
               />
-              <Button>Search</Button>
             </div>
           </div>
           <Table>
@@ -50,7 +67,6 @@ export default function AttendanceIndex({ attendances }: InferPageProps<Attendan
                 <TableHead>Student Name</TableHead>
                 <TableHead>Class</TableHead>
                 <TableHead>Clock In</TableHead>
-                {/* <TableHead>Clock Iasn</TableHead> */}
                 <TableHead>Clock Out</TableHead>
               </TableRow>
             </TableHeader>
@@ -61,13 +77,15 @@ export default function AttendanceIndex({ attendances }: InferPageProps<Attendan
                   <TableCell>{`${attendance.student.firstName} ${attendance.student.lastName}`}</TableCell>
                   <TableCell>{attendance.class.name}</TableCell>
                   <TableCell>{DateTime.fromISO(attendance.clockIn as unknown as string).toLocaleString(DateTime.DATETIME_MED)}</TableCell>
-                  {/* <TableCell>{attendance.clockIn.toFormat('yyyy LLL dd HH:m')}</TableCell> */}
-                  <TableCell>{DateTime.fromISO(attendance.clockOut as unknown as string).toLocaleString(DateTime.DATETIME_MED) || 'Not clocked out'}</TableCell>
+                  <TableCell>{attendance.clockOut ? DateTime.fromISO(attendance.clockOut as unknown as string).toLocaleString(DateTime.DATETIME_MED) : 'Not clocked out'}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-          {/* Pagination controls can be added here */}
+          <PaginationComponent 
+            paginationData={attendances.meta} 
+            baseRoute={`/myschools/classes/${classId}/attendances`}
+          />
         </div>
       </SchoolLayout>
     </>

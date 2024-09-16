@@ -9,14 +9,19 @@ export default class RolesController {
     const search = request.input('search')
     let query = Role.query()
     query = query.preload('user').preload('school')
+    //console.log(query);
+    
     if (search) {
+    console.log(search);
       query
-        // .preload('user', (userQuery) => {
-        //   userQuery
-        //     .where('full_name', 'like', `%${search}%`)
-        //     .orWhere('email', 'like', `%${search}%`)
-        //     .orWhere('phone', 'like', `%${search}%`)
-        // })
+        // .preload('user')
+        // .whereExists((query)=>query.fr)
+        .whereHas('user', (userQuery)=>{
+          userQuery
+            // .where('full_name', 'like', `%${search}%`)
+            .where('email', 'like', `%${search}%`)
+            // .orWhere('phone', 'like', `%${search}%`)
+        })
         // .preload('school', (schoolQuery) => {
         //   schoolQuery
         //     .where('name', 'like', `%${search}%`)
