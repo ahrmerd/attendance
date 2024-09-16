@@ -23,7 +23,8 @@ export default class AttendancesController {
 
     if (search) {
       query = query.whereHas('student', (studentQuery) => {
-        studentQuery.where('name', 'like', `%${search}%`)
+        studentQuery.where('first_name', 'like', `%${search}%`)
+                    .orWhere('last_name', 'like', `%${search}%`)
       })
     }
 
@@ -31,6 +32,7 @@ export default class AttendancesController {
 
     return inertia.render('myschools/school_attendance_index', {
       attendances,
+      classId: classId,
     })
   }
 }
