@@ -40,7 +40,7 @@ const schoolTeachers = teachers.filter(teacher=>teacher.schoolId== parseInt(data
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    post('/classes', {
+    post('/myschools/classes', {
       preserveState: true,
       preserveScroll: true,
       onSuccess: () => {

@@ -58,6 +58,13 @@ export default function ClassIndex(props: InferPageProps<ClassesController, 'ind
                       </Link>
                     </Button>
                   </TableCell>
+                  <TableCell >
+                    <Button  variant="outline" size="sm"> 
+                    <Link href={`/myschools/classes/${classItem.id}/students`}>
+                    View Students
+                    </Link>
+                    </Button>
+                    </TableCell>
                 </TableRow>
               ))}
             </TableBody>

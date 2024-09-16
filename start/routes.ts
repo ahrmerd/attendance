@@ -42,7 +42,9 @@ router
     router.on('/myschools').renderInertia('myschools/my_school_dashboard').as('myschools')
     router.resource('/myschools/classes', ClassesController).as('classes')
     router.resource('/myschools/students', StudentsController).as('students')
+    
     router.get('/myschools/classes/:id/attendances', [AttendancesController, 'index']).as('attendances.index')
+    router.get('/myschools/classes/:id/students', [StudentsController, 'classStudents']).as('classes.students')
     router.resource('/myschools/roles', SchoolRoleController).as('school_role')
     //roles for schools
     //attendance
