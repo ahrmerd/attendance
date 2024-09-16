@@ -33,11 +33,16 @@ router
     // router.get('/dashboard', )
   })
   .middleware(middleware.guest())
-  router.group(()=>{
+
+router.group(() => {}).middleware(middleware.schoolAuth({ guards: ['api'] }))
+
+router
+  .group(() => {
     router.on('/myschool').renderInertia('myschool/my_school_dashboard').as('myschool')
     router.resource('/classes', ClassesController).as('classes')
     router.resource('/students', StudentsController).as('students')
-  }).middleware(middleware.schoolAuth());
+  })
+  .middleware(middleware.schoolAuth())
 router
   .group(() => {
     router.on('not-school').renderInertia('not_school').as('notSchool')

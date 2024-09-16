@@ -6,6 +6,8 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import Role from '#models/role'
 import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import Class from '#models/class'
+import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
+import { AccessToken } from '@adonisjs/auth/access_tokens'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -13,6 +15,10 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 })
 
 export default class User extends compose(BaseModel, AuthFinder) {
+  static accessTokens = DbAccessTokensProvider.forModel(User)
+
+  // currentAccessToken?: AccessToken
+
   @column({ isPrimary: true })
   declare id: number
 

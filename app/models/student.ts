@@ -4,7 +4,6 @@ import Class from '#models/class'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import School from '#models/school'
 
-
 export default class Student extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
@@ -28,7 +27,7 @@ export default class Student extends BaseModel {
   declare lastName: string
 
   @column()
-  declare dateOfBirth: string
+  declare dateOfBirth: Date | undefined
 
   @column()
   declare status: 'active' | 'inactive'
