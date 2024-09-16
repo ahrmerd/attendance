@@ -38,21 +38,37 @@ router
   })
   .middleware(middleware.guest())
 
-  router.group(()=>{
+router
+  .group(() => {
     router.on('/myschools').renderInertia('myschools/my_school_dashboard').as('myschools')
     router.resource('/myschools/classes', ClassesController).as('classes')
     router.resource('/myschools/students', StudentsController).as('students')
-    
-    router.get('/myschools/classes/:id/attendances', [AttendancesController, 'index']).as('attendances.index')
-    router.get('/myschools/classes/:id/students', [StudentsController, 'classStudents']).as('classes.students')
+
+    router
+      .get('/myschools/classes/:id/attendances', [AttendancesController, 'index'])
+      .as('attendances.index')
+    router
+      .get('/myschools/classes/:id/students', [StudentsController, 'classStudents'])
+      .as('classes.students')
     router.resource('/myschools/roles', SchoolRoleController).as('school_role')
     //roles for schools
     //attendance
     // router.resource('/myschools/students', StudentsController).as('students')
-  }).middleware(middleware.schoolAuth());
+  })
+  .middleware(middleware.schoolAuth())
+
+router.group(() => {}).middleware(middleware.schoolAuth({ guards: ['api'] }))
 
 router
-.group(() => {User
+  .group(() => {
+    router.on('/myschool').renderInertia('myschool/my_school_dashboard').as('myschool')
+    router.resource('/classes', ClassesController).as('classes')
+    router.resource('/students', StudentsController).as('students')
+  })
+  .middleware(middleware.schoolAuth())
+router
+  .group(() => {
+    User
     router.on('not-school').renderInertia('not_school').as('notSchool')
     router.on('not-admin').renderInertia('not_admin').as('notAdmin')
     router.post('/logout', [LoginUsersController, 'logout']).as('logout')
