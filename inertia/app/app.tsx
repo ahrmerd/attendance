@@ -1,7 +1,7 @@
 /// <reference path="../../adonisrc.ts" />
 /// <reference path="../../config/inertia.ts" />
 
-import '../css/app2.css'
+import '../css/app.css'
 import './bootstrap'
 
 import { createRoot } from 'react-dom/client'
