@@ -69,7 +69,6 @@ export default function ClassStudentIndex(props: InferPageProps<StudentControlle
                 <TableHead>Last Name</TableHead>
                 <TableHead>Class</TableHead>
                 <TableHead>Primary Number</TableHead>
-                <TableHead>Date Of Birth</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
@@ -82,7 +81,6 @@ export default function ClassStudentIndex(props: InferPageProps<StudentControlle
                   <TableCell>{student.lastName}</TableCell>
                   <TableCell>{student.class.name}</TableCell>
                   <TableCell>{student.primaryContact}</TableCell>
-                  <TableCell>{student.dateOfBirth}</TableCell>
                   <TableCell>{student.status}</TableCell>
                   <TableCell>
                     <Button onClick={() => openEditingModal(student)}>Edit</Button>

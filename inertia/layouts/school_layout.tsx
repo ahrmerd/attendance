@@ -39,14 +39,14 @@ export default function SchoolLayout({ children }: SchoolLayoutProps) {
             <h1 className="text-lg font-bold sm:text-xl">School Dashboard</h1>
           </div>
           <div className="flex items-center gap-4">
-            <div className="relative">
+            {/* <div className="relative">
 
               <Input
                 type="search"
                 placeholder="Search..."
                 className="w-full rounded-lg bg-background pl-8 sm:w-[200px] lg:w-[300px]"
               />
-            </div>
+            </div> */}
             <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button className="rounded-full" size="icon" variant="ghost">

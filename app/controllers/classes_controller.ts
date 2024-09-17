@@ -8,6 +8,7 @@ import Role from '#models/role'
 
 export default class ClassesController {
   async index({ inertia, request, auth }: HttpContext) {
+
     const roles: Role[] = await auth.user?.related('role').query().exec()
 
     const page = request.input('page', 1)

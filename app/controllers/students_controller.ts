@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Student from '#models/student'
 import Class from '#models/class'
 import { editStudentValidator } from '#validators/student_validator'
+import { DateTime } from 'luxon'
 
 export default class StudentsController {
     async index({ inertia, request, auth, response }: HttpContext) {
@@ -32,7 +33,18 @@ export default class StudentsController {
     
     async classStudents({ inertia, request, params, auth }: HttpContext) {
         
-        // 
+        // const student =await Student.create({
+        //     id:23,
+        //     schoolId:1,
+        //     classId:1,
+        //     firstName:'Sadam',
+        //     lastName:'sediq',
+        //     finger1: Buffer.alloc(32),
+        //     finger2:Buffer.alloc(32),
+        //     status: 'active',
+        //     primaryContact: '0702276252',
+        //     // studentId:1
+        // })
         const classId = params.id
         const page = request.input('page', 1)
         const search = request.input('search')

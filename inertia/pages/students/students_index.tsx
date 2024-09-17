@@ -99,9 +99,9 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
                 <TableHead>#</TableHead>
                 <TableHead>First Name</TableHead>
                 <TableHead>Last Name</TableHead>
-                <TableHead>Student Id</TableHead>
+                {/* <TableHead>Student Id</TableHead> */}
                 <TableHead>Contact</TableHead>
-                <TableHead>Date of Birth</TableHead>
+                {/* <TableHead>Date of Birth</TableHead> */}
                 <TableHead>School</TableHead>
                 <TableHead>Class</TableHead>
                 <TableHead>Status</TableHead>
@@ -111,15 +111,16 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
             <TableBody>
               {student.map((student) => (
                 <TableRow key={student.id}>
+                  <TableCell>{student.id}</TableCell>
                   <TableCell>{student.firstName}</TableCell>
                   <TableCell>{student.lastName}</TableCell>
-                  <TableCell>{student.studentId}</TableCell>
+                  {/* <TableCell>{student.studentId}</TableCell> */}
                   <TableCell>{student.primaryContact}</TableCell>
-                  <TableCell>{student.dateOfBirth}</TableCell>
+                  {/* <TableCell>{student.dateOfBirth}</TableCell> */}
                   <TableCell>{student.school.name}</TableCell>
                   <TableCell>{student.class.name}</TableCell>
                   <TableCell>{student.status}</TableCell>
-                  <TableCell>
+                  <TableCell className='flex'>
                     <Button className="mr-4 " onClick={() => openEditingModal(student)}>
                       Edit
                     </Button>

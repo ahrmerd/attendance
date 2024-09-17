@@ -27,7 +27,6 @@ export const storeStudentValidator = vine.compile(
     firstName: vine.string().trim().maxLength(256),
     lastName: vine.string().trim().maxLength(256),
     primaryContact: vine.string().trim().maxLength(256),
-    dateOfBirth: vine.date(), //should be nullable
     classId: vine.number().exists(async (db, value, _field) => {
       const cl = await db.from('classes').where('id', value).first()
       return cl
