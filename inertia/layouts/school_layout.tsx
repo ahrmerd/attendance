@@ -28,9 +28,7 @@ export default function SchoolLayout({ children }: SchoolLayoutProps) {
   const theme = useTheme()
   return (
     <div className="flex flex-col w-full min-h-screen bg-muted/40 dark:bg-gray-950">
-
-
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-background px-4 sm:px-6">
+        <header className="flex items-center justify-between h-16 px-6 border-b dark:border-gray-800 dark:bg-gray-900">
           <div className="flex items-center gap-4">
             <Button size="icon" variant="ghost" className="sm:hidden">
               <LayoutDashboardIcon />

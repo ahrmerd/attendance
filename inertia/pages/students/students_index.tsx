@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { Button } from '@/components/ui/button'
 import {
   Table,
   TableBody,
@@ -7,19 +7,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Button } from '@/components/ui/button'
-import AdminLayout from '@/layouts/admin_layout'
-import { Head, router, useForm } from '@inertiajs/react'
+import { Head, useForm } from '@inertiajs/react'
+import { useEffect, useState } from 'react'
 // import CreateUserModal from '@/components/modals/create_users_modal'
-import { InferPageProps } from '@adonisjs/inertia/types'
 import type StudentsController from '#controllers/students_controller'
 import Student from '#models/student'
-import { BadgeXIcon, VerifiedIcon } from 'lucide-react'
 import PaginationComponent from '@/components/pagination_component'
-import { debounce } from 'lodash'
 import { Input } from '@/components/ui/input'
-import CreateStudentModal from '@/components/modals/create_student_modal'
 import SchoolLayout from '@/layouts/school_layout'
+import { InferPageProps } from '@adonisjs/inertia/types'
+import { debounce } from 'lodash'
 
 
 export default function StudentIndex(props: InferPageProps<StudentsController, 'index'>) {

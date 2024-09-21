@@ -1,10 +1,9 @@
 import { Link } from '@inertiajs/react'
 import {
   LayoutDashboardIcon,
-  PlayIcon,
   SchoolIcon,
   SettingsIcon,
-  UsersIcon,
+  UsersIcon
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -52,11 +51,11 @@ export function SchoolSidebar() {
   //   const playlists = usePage().props.playlists
 
   return (
-    <div className="py-12">
-      <div className="py-4 space-y-4">
+    <div className="py-1">
+      <div className="py-1 ">
         <div className="px-3 py-2">
           {/* <h2 className="px-4 mb-2 text-lg font-semibold tracking-tight">Discover</h2> */}
-          <div className="space-y-1">
+          <div className="">
             {navItems.map((item) => (
               <Link
                 key={item.routeName}
