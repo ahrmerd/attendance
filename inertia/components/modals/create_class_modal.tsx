@@ -1,54 +1,59 @@
-import React, { FormEvent } from 'react';
-import { useForm } from '@inertiajs/react';
-import { Button } from '@/components/ui/button';
+import React, { FormEvent } from 'react'
+import { useForm } from '@inertiajs/react'
+import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/select'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { convertToCapitalizedWords } from '@/lib/utils';
-import Role from '#models/role';
-import School from '#models/school';
+} from '@/components/ui/dialog'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { convertToCapitalizedWords } from '@/lib/utils'
+import Role from '#models/role'
+import School from '#models/school'
 
 interface CreateClassModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  schools: School[];
-  teachers: Role[];
+  isOpen: boolean
+  onClose: () => void
+  schools: School[]
+  teachers: Role[]
 }
 
-export default function CreateClassModal({ isOpen, onClose, schools, teachers }: CreateClassModalProps) {
+export default function CreateClassModal({
+  isOpen,
+  onClose,
+  schools,
+  teachers,
+}: CreateClassModalProps) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
     schoolId: '',
     teacherId: '',
-  });
-console.log(teachers);
+  })
+  console.log(teachers)
 
-const schoolTeachers = teachers.filter(teacher=>teacher.schoolId== parseInt(data.schoolId));
+  const schoolTeachers = teachers.filter((teacher) => teacher.schoolId == parseInt(data.schoolId))
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     post('/myschools/classes', {
       preserveState: true,
       preserveScroll: true,
       onSuccess: () => {
-        reset();
-        onClose();
+        reset()
+        onClose()
       },
-    });
-  };
+    })
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -90,12 +95,16 @@ const schoolTeachers = teachers.filter(teacher=>teacher.schoolId== parseInt(data
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="teacherId">Teacher</Label>
-              <Select disabled={schoolTeachers.length==0} value={data.teacherId} onValueChange={(value) => setData('teacherId', value)}>
+              <Select
+                disabled={schoolTeachers.length == 0}
+                value={data.teacherId}
+                onValueChange={(value) => setData('teacherId', value)}
+              >
                 <SelectTrigger id="teacherId">
                   <SelectValue placeholder="Select a teacher" />
                 </SelectTrigger>
                 <SelectContent>
-                  { schoolTeachers.map((teacher) => (
+                  {schoolTeachers.map((teacher) => (
                     <SelectItem key={teacher.user.id} value={teacher.user.id.toString()}>
                       {teacher.user.fullName}
                     </SelectItem>
@@ -103,7 +112,9 @@ const schoolTeachers = teachers.filter(teacher=>teacher.schoolId== parseInt(data
                 </SelectContent>
               </Select>
               {errors.teacherId && (
-                <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.teacherId)}</p>
+                <p className="text-sm text-red-500">
+                  {convertToCapitalizedWords(errors.teacherId)}
+                </p>
               )}
             </div>
           </div>
@@ -115,5 +126,5 @@ const schoolTeachers = teachers.filter(teacher=>teacher.schoolId== parseInt(data
         </form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

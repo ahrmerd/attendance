@@ -6,7 +6,7 @@ import { addRoleValidator, editRoleValidator } from '#validators/roles_validator
 export default class RolesController {
   async index({ inertia, request, auth }: HttpContext) {
     const authUserRoles = await auth.user?.related('role').query().exec()
-    const schoolsId = authUserRoles?.map(role => role.schoolId) ?? [];
+    const schoolsId = authUserRoles?.map((role) => role.schoolId) ?? []
     // const schoolTeachers = (await Role.query()
     // .whereIn('school_id', schoolsId)
     // .preload('user').exec())

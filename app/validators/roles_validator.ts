@@ -4,7 +4,6 @@ export const addRoleValidator = vine.compile(
     userId: vine
       .number() //   .exists()
       .exists(async (db, value, _field) => {
-
         const user = await db.from('users').where('id', value).first()
         return user
       }),

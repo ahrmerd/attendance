@@ -21,9 +21,7 @@ import { Input } from '@/components/ui/input'
 import CreateStudentModal from '@/components/modals/create_student_modal'
 import SchoolLayout from '@/layouts/school_layout'
 
-
 export default function StudentIndex(props: InferPageProps<StudentsController, 'index'>) {
-
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false)
@@ -120,7 +118,7 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
                   <TableCell>{student.school.name}</TableCell>
                   <TableCell>{student.class.name}</TableCell>
                   <TableCell>{student.status}</TableCell>
-                  <TableCell className='flex'>
+                  <TableCell className="flex">
                     <Button className="mr-4 " onClick={() => openEditingModal(student)}>
                       Edit
                     </Button>
@@ -146,7 +144,6 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
               }}
             />
           )} */}
-         
         </div>
       </SchoolLayout>
     </>

@@ -1,15 +1,22 @@
-import { InferPageProps } from "@adonisjs/inertia/types"
-import ClassesController from "#controllers/classes_controller"
-import { Head, Link } from "@inertiajs/react"
-import SchoolLayout from "@/layouts/school_layout"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import CreateClassModal from "@/components/modals/create_class_modal"
-import { useState } from "react"
-import School from "#models/school"
-import User from "#models/user"
-import Class from "#models/class"
-import Role from "#models/role"
+import { InferPageProps } from '@adonisjs/inertia/types'
+import ClassesController from '#controllers/classes_controller'
+import { Head, Link } from '@inertiajs/react'
+import SchoolLayout from '@/layouts/school_layout'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
+import CreateClassModal from '@/components/modals/create_class_modal'
+import { useState } from 'react'
+import School from '#models/school'
+import User from '#models/user'
+import Class from '#models/class'
+import Role from '#models/role'
 
 type ClassWithRelations = Class & {
   school: School
@@ -49,7 +56,9 @@ export default function ClassIndex(props: InferPageProps<ClassesController, 'ind
                   <TableCell>{classItem.school?.name || 'N/A'}</TableCell>
                   <TableCell>{classItem.teacher?.fullName || 'N/A'}</TableCell>
                   <TableCell>
-                    <Button variant="outline" size="sm">Edit</Button>
+                    <Button variant="outline" size="sm">
+                      Edit
+                    </Button>
                   </TableCell>
                   <TableCell>
                     <Button variant="outline" size="sm">
@@ -58,13 +67,13 @@ export default function ClassIndex(props: InferPageProps<ClassesController, 'ind
                       </Link>
                     </Button>
                   </TableCell>
-                  <TableCell >
-                    <Button  variant="outline" size="sm"> 
-                    <Link href={`/myschools/classes/${classItem.id}/students`}>
-                    View Students
-                    </Link>
+                  <TableCell>
+                    <Button variant="outline" size="sm">
+                      <Link href={`/myschools/classes/${classItem.id}/students`}>
+                        View Students
+                      </Link>
                     </Button>
-                    </TableCell>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

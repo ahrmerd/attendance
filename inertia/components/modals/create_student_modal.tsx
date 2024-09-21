@@ -64,7 +64,9 @@ export default function CreateStudentModal({ isOpen, onClose }: CreateUserModalP
                 onChange={(e) => setData('firstName', e.target.value)}
               />
               {errors.firstName && (
-                <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.firstName)}</p>
+                <p className="text-sm text-red-500">
+                  {convertToCapitalizedWords(errors.firstName)}
+                </p>
               )}
             </div>
             <div className="flex flex-col space-y-1.5">
@@ -88,7 +90,9 @@ export default function CreateStudentModal({ isOpen, onClose }: CreateUserModalP
                 onChange={(e) => setData('studentId', e.target.value)}
               />
               {errors.studentId && (
-                <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.studentId)}</p>
+                <p className="text-sm text-red-500">
+                  {convertToCapitalizedWords(errors.studentId)}
+                </p>
               )}
             </div>
             <div className="flex flex-col space-y-1.5">
@@ -100,7 +104,9 @@ export default function CreateStudentModal({ isOpen, onClose }: CreateUserModalP
                 onChange={(e) => setData('primaryContact', e.target.value)}
               />
               {errors.primaryContact && (
-                <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.primaryContact)}</p>
+                <p className="text-sm text-red-500">
+                  {convertToCapitalizedWords(errors.primaryContact)}
+                </p>
               )}
             </div>
             <div className="flex flex-col space-y-1.5">
@@ -112,7 +118,9 @@ export default function CreateStudentModal({ isOpen, onClose }: CreateUserModalP
                 onChange={(e) => setData('dateOfBirth', e.target.value)}
               />
               {errors.dateOfBirth && (
-                <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.dateOfBirth)}</p>
+                <p className="text-sm text-red-500">
+                  {convertToCapitalizedWords(errors.dateOfBirth)}
+                </p>
               )}
             </div>
             <div className="flex flex-col space-y-1.5">

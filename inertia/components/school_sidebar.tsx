@@ -1,11 +1,5 @@
 import { Link } from '@inertiajs/react'
-import {
-  LayoutDashboardIcon,
-  PlayIcon,
-  SchoolIcon,
-  SettingsIcon,
-  UsersIcon,
-} from 'lucide-react'
+import { LayoutDashboardIcon, PlayIcon, SchoolIcon, SettingsIcon, UsersIcon } from 'lucide-react'
 import { useState } from 'react'
 
 const navItems = [
