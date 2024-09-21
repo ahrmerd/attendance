@@ -5,7 +5,6 @@ import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations
 import User from '#models/user'
 import Attendance from '#models/attendance'
 
-
 export default class Class extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
@@ -19,19 +18,18 @@ export default class Class extends BaseModel {
   @column()
   declare status: 'active' | 'inactive'
 
-
   @column()
   declare teacherId: number
-  
-  @belongsTo(()=> School)
+
+  @belongsTo(() => School)
   declare school: BelongsTo<typeof School>
 
-  @belongsTo(()=> User,{
+  @belongsTo(() => User, {
     foreignKey: 'teacherId',
   })
   declare teacher: BelongsTo<typeof User>
 
-  @hasMany(()=> Attendance)
+  @hasMany(() => Attendance)
   declare attendance: HasMany<typeof Attendance>
 
   @column.dateTime({ autoCreate: true })

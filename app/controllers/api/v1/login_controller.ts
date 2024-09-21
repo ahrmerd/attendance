@@ -4,7 +4,7 @@ import { loginUserValidator } from '#validators/user_validator'
 import { errors as authErrors } from '@adonisjs/auth'
 
 export default class LoginController {
-  async login(ctx : HttpContext) {
+  async login(ctx: HttpContext) {
     // console.log(auth.user)
     // auth.use('web').logout()
     // return 'ass'
@@ -28,7 +28,7 @@ export default class LoginController {
       return ctx.response.send(error)
 
       // throw error
-        // return super.handle(error, ctx)
+      // return super.handle(error, ctx)
     }
     // return ctx.response.redirect().toRoute('dashboard')
     // payload.password = await hash.make(payload.password)

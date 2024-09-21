@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
-import Class  from '#models/class'
+import Class from '#models/class'
 import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import Student from '#models/student'
 
@@ -20,12 +20,12 @@ export default class Attendance extends BaseModel {
   @column.dateTime()
   declare clockOut: DateTime
 
-  @belongsTo(()=> Class,{
+  @belongsTo(() => Class, {
     foreignKey: 'classId',
   })
   declare class: BelongsTo<typeof Class>
 
-  @belongsTo(()=> Student,{
+  @belongsTo(() => Student, {
     foreignKey: 'studentId',
   })
   declare student: BelongsTo<typeof Student>

@@ -23,8 +23,32 @@ export default class AttendanceController {
         .orWhere('teacher_id', user.id)
         .exec()
       const classesIds = classes.map((sclass) => sclass.id)
-      const students = Student.query().whereIn('class_id', classesIds)
-      return students
+      const attendances = Attendance.query().preload('student').whereIn('class_id', classesIds)
+      return attendances
+      // const teacherSchoolsClass = await Class.query().whereIn('school_id', adminschoolsId)
+    }
+  }
+
+  async classIndex({ request, auth, params }: HttpContext) {
+    //should add schoolId to attendance
+    const classId = params.id
+    const user = await auth.user
+    if (user) {
+      const roles: Role[] = await user.related('role').query().exec()
+      // user?.related('role')
+      const adminschoolsId = roles
+        ?.filter((role: Role) => role.role === 'admin')
+        .map((role) => role.schoolId)
+      const classes = await Class.query()
+        .whereIn('school_id', adminschoolsId)
+        .orWhere('teacher_id', user.id)
+        .exec()
+      const classesIds = classes.map((sclass) => sclass.id)
+      const attendances = Attendance.query()
+        .preload('student')
+        .whereIn('class_id', classesIds)
+        .where('class_id', classId)
+      return attendances
       // const teacherSchoolsClass = await Class.query().whereIn('school_id', adminschoolsId)
     }
   }
