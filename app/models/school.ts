@@ -23,7 +23,7 @@ export default class School extends BaseModel {
   @column()
   declare status: 'active' | 'inactive'
 
-  @hasMany(()=>Class)
+  @hasMany(() => Class)
   declare class: HasMany<typeof Class>
 
   @column.dateTime({ autoCreate: true })

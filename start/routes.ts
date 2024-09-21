@@ -19,14 +19,13 @@ const ClassesController = () => import('#controllers/classes_controller')
 // import StudentsController from 'app/controllers/students_controller.js'
 const StudentsController = () => import('#controllers/students_controller')
 const StudentsApiController = () => import('#controllers/api/v1/students_controller')
+const ClassesApiController = () => import('#controllers/api/v1/classes_controller')
+const AttendancesApiController = () => import('#controllers/api/v1/attendances_controller')
 const RolesController = () => import('#controllers/roles_controller')
 const UsersController = () => import('#controllers/users_controller')
 const SchoolsController = () => import('#controllers/schools_controller')
 const AttendancesController = () => import('#controllers/attendances_controller')
 const SchoolRoleController = () => import('#controllers/school_roles_controller')
-
-
-
 
 router.on('/').renderInertia('home', { version: 6 }).as('home')
 // router.on('/').renderInertia('admin/dashboard', { version: 6 }).as('home-dash')
@@ -34,7 +33,7 @@ router.on('/').renderInertia('home', { version: 6 }).as('home')
 router
   .group(() => {
     router.get('/login', [LoginUsersController, 'create']).as('login')
-    router.post('/api/v1/login', [ApiLoginController, 'login']).as('api.login')
+
     router.post('/login', [LoginUsersController, 'login'])
     router.get('/register', [RegisterUsersController, 'create'])
     router.post('/register', [RegisterUsersController, 'register'])
@@ -60,23 +59,19 @@ router
   })
   .middleware(middleware.schoolAuth())
 
-router.group(() => {
-  router.get('/api/v1/students', [StudentsApiController, 'index']).as('students.index')
-})
-.middleware(middleware.schoolAuth({ guards: ['api'] }))
-.as('api.')
-
-
 router
   .group(() => {
     User
     router.on('not-school').renderInertia('not_school').as('notSchool')
     router.on('not-admin').renderInertia('not_admin').as('notAdmin')
+
     router.post('/logout', [LoginUsersController, 'logout']).as('logout')
     router.get('schools/search', [SchoolsController, 'search']).as('schools.search')
     router.get('users/search', [UsersController, 'search']).as('users.search')
     router.resource('schools', SchoolsController).as('schools').except(['edit', 'show'])
-    router.get('users/:id/password', [UsersController, 'changePassword']).as('users.changePasswprd')
+    router
+      .post('users/:id/password', [UsersController, 'changePassword'])
+      .as('users.changePasswprd')
     router.resource('users', UsersController).as('users')
     router.resource('roles', RolesController).as('roles')
     router.on('/dashboard').renderInertia('admin/dashboard', { version: 6 }).as('dashboard')
@@ -84,3 +79,28 @@ router
     // router.get('/dashboard', )
   })
   .middleware(middleware.auth())
+
+//api routes
+router
+  .group(() => {
+    router.group(() => {
+      router.post('/api/v1/login', [ApiLoginController, 'login']).as('login')
+    })
+    router
+      .group(() => {
+        router.get('/api/v1/students', [StudentsApiController, 'index']).as('students.index')
+        router.post('/api/v1/students', [StudentsApiController, 'store']).as('students.store')
+        router.get('/api/v1/classes', [ClassesApiController, 'index']).as('classes.index')
+        router
+          .get('/api/v1/attendances', [AttendancesApiController, 'index'])
+          .as('attendances.index')
+        router
+          .post('/api/v1/attendances', [AttendancesApiController, 'store'])
+          .as('attendances.store')
+        router
+          .get('/api/v1/class/:id/attendances', [AttendancesApiController, 'classIndex'])
+          .as('class.attendances')
+      })
+      .middleware(middleware.auth({ guards: ['api'] }))
+  })
+  .as('api.')

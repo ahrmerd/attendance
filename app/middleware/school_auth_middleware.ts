@@ -15,7 +15,10 @@ export default class SchoolAuthMiddleware {
     const user = await ctx.auth.authenticateUsing(options.guards, { loginRoute: this.redirectTo })
     // const user = ctx.auth.user
     const role = await user.related('role').query().first()
-    if (!role || role.role !== 'admin') {
+    // if (!role || role.role !== 'admin') {
+    //   return ctx.response.redirect().toRoute('notSchool')
+    // }
+    if (!role) {
       return ctx.response.redirect().toRoute('notSchool')
     }
     return next()

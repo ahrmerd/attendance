@@ -3,6 +3,12 @@ import School from '#models/school'
 
 export const SchoolFactory = factory
   .define(School, async ({ faker }) => {
-    return {}
+    return {
+      name: faker.word.words(4),
+      address: faker.word.words(4),
+      phone: faker.phone.number(),
+      email: faker.internet.email(),
+      // status: 'active' as 'active',
+    }
   })
   .build()

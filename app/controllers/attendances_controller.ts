@@ -4,9 +4,8 @@ import { DateTime } from 'luxon'
 
 export default class AttendancesController {
   async index({ inertia, request, params }: HttpContext) {
-
     // const attendance = await Attendance.create({
-    //         studentId: 1, 
+    //         studentId: 1,
     //         classId: 1,
     //         clockIn: DateTime.now(),
     //         clockOut:  DateTime.now(),
@@ -18,13 +17,15 @@ export default class AttendancesController {
 
     let query = Attendance.query()
       .where('class_id', classId)
+      .orderBy('clock_in', 'desc')
       .preload('student')
       .preload('class')
 
     if (search) {
       query = query.whereHas('student', (studentQuery) => {
-        studentQuery.where('first_name', 'like', `%${search}%`)
-                    .orWhere('last_name', 'like', `%${search}%`)
+        studentQuery
+          .where('first_name', 'like', `%${search}%`)
+          .orWhere('last_name', 'like', `%${search}%`)
       })
     }
 

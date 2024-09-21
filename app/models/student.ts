@@ -45,7 +45,7 @@ export default class Student extends BaseModel {
   @belongsTo(() => Class)
   declare class: BelongsTo<typeof Class>
 
-  @hasMany(()=>Attendance)
+  @hasMany(() => Attendance)
   declare attendance: HasMany<typeof Attendance>
 
   @belongsTo(() => School)
