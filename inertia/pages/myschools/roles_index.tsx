@@ -114,7 +114,6 @@ export default function RoleIndex(props: InferPageProps<RolesController, 'index'
                   <TableCell>
                     <div className="flex gap-2">
                       <Button onClick={() => openEditingModal(role)}>Edit</Button>
-                      {/* <Button> */}
                       <Link
                         className={cn(buttonVariants())}
                         href={`/roles/${role.id}`}

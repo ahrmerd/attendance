@@ -13,7 +13,6 @@ export default class extends BaseSchema {
       table.string('last_name', 50).notNullable()
       table.binary('finger_1').notNullable()
       table.binary('finger_2').notNullable()
-      table.date('date_of_birth').notNullable()
       table.string('primary_contact', 20).notNullable()
 
       table.enum('status', ['active', 'inactive']).defaultTo('active')

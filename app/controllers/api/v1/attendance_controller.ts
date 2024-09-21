@@ -45,7 +45,7 @@ export default class AttendanceController {
         classId: student.classId,
         clockIn: DateTime.now(),
       })
-      sms_services.sendToStudent(
+      await sms_services.sendToStudent(
         student,
         `Your ward ${student.firstName + ' ' + student.lastName} has just arrived the school premisis at ${attendance.clockIn}`
       )

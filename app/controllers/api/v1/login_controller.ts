@@ -4,11 +4,11 @@ import { loginUserValidator } from '#validators/user_validator'
 import { errors as authErrors } from '@adonisjs/auth'
 
 export default class LoginController {
-  async login({ inertia, request, session, ...ctx }: HttpContext) {
+  async login(ctx : HttpContext) {
     // console.log(auth.user)
     // auth.use('web').logout()
-
-    const payload = await request.validateUsing(loginUserValidator)
+    // return 'ass'
+    const payload = await ctx.request.validateUsing(loginUserValidator)
     try {
       const user = await User.verifyCredentials(payload.email, payload.password)
       const oldTokens = await User.accessTokens.all(user)
@@ -19,14 +19,16 @@ export default class LoginController {
       return token
     } catch (error) {
       if (error instanceof authErrors.E_INVALID_CREDENTIALS) {
-        session.flash('errors', { email: 'invalid creds' })
-        return ctx.response.redirect().back()
+        ctx.session.flash('errors', { email: 'invalid creds' })
+        // return ctx.response.send((error.message))
         // console.log();
         // throw new vineErrors.E_VALIDATION_ERROR([error.message])
-        // return ctx.response.status(error.status).send(error.getResponseMessage(error, ctx))
+        return ctx.response.status(error.status).send(error)
       }
-      throw error
-      //   return super.handle(error, ctx)
+      return ctx.response.send(error)
+
+      // throw error
+        // return super.handle(error, ctx)
     }
     // return ctx.response.redirect().toRoute('dashboard')
     // payload.password = await hash.make(payload.password)

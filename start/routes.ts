@@ -8,6 +8,7 @@
 */
 
 const LoginUsersController = () => import('#controllers/login_users_controller')
+const ApiLoginController = () => import('#controllers/api/v1/login_controller')
 const RegisterUsersController = () => import('#controllers/register_users_controller')
 
 import router from '@adonisjs/core/services/router'
@@ -17,11 +18,15 @@ import User from '#models/user'
 const ClassesController = () => import('#controllers/classes_controller')
 // import StudentsController from 'app/controllers/students_controller.js'
 const StudentsController = () => import('#controllers/students_controller')
+const StudentsApiController = () => import('#controllers/api/v1/students_controller')
 const RolesController = () => import('#controllers/roles_controller')
 const UsersController = () => import('#controllers/users_controller')
 const SchoolsController = () => import('#controllers/schools_controller')
 const AttendancesController = () => import('#controllers/attendances_controller')
 const SchoolRoleController = () => import('#controllers/school_roles_controller')
+
+
+
 
 router.on('/').renderInertia('home', { version: 6 }).as('home')
 // router.on('/').renderInertia('admin/dashboard', { version: 6 }).as('home-dash')
@@ -29,12 +34,10 @@ router.on('/').renderInertia('home', { version: 6 }).as('home')
 router
   .group(() => {
     router.get('/login', [LoginUsersController, 'create']).as('login')
+    router.post('/api/v1/login', [ApiLoginController, 'login']).as('api.login')
     router.post('/login', [LoginUsersController, 'login'])
     router.get('/register', [RegisterUsersController, 'create'])
     router.post('/register', [RegisterUsersController, 'register'])
-    // router.on('/dashboard').renderInertia('admin/dashboard', { version: 6 }).as('home-dash')
-
-    // router.get('/dashboard', )
   })
   .middleware(middleware.guest())
 
@@ -57,15 +60,13 @@ router
   })
   .middleware(middleware.schoolAuth())
 
-router.group(() => {}).middleware(middleware.schoolAuth({ guards: ['api'] }))
+router.group(() => {
+  router.get('/api/v1/students', [StudentsApiController, 'index']).as('students.index')
+})
+.middleware(middleware.schoolAuth({ guards: ['api'] }))
+.as('api.')
 
-router
-  .group(() => {
-    router.on('/myschool').renderInertia('myschool/my_school_dashboard').as('myschool')
-    router.resource('/classes', ClassesController).as('classes')
-    router.resource('/students', StudentsController).as('students')
-  })
-  .middleware(middleware.schoolAuth())
+
 router
   .group(() => {
     User

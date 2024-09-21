@@ -28,9 +28,6 @@ export default class Student extends BaseModel {
   declare lastName: string
 
   @column()
-  declare dateOfBirth: Date | undefined
-
-  @column()
   declare status: 'active' | 'inactive'
 
   @column()

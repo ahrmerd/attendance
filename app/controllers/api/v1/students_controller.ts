@@ -9,7 +9,9 @@ import { storeStudentValidator } from '#validators/student_validator'
 
 export default class StudentsController {
   async index({ request, auth }: HttpContext) {
-    const user = await auth.user
+    // return 'hello'
+    const user = await auth.authenticateUsing(['api'])
+    // const user = await auth.user
     if (user) {
       const roles: Role[] = await user.related('role').query().exec()
       // user?.related('role')
@@ -34,9 +36,13 @@ export default class StudentsController {
     return student
   }
   async update({ request }: HttpContext) {
-    //not yet implemented
+    //will not yet implemented
   }
   async sync(ctx: HttpContext) {
+    //will get the students data from the post body
+    //will then check if students exists
+    //will update to the backend
+    //then refetch all the students
     return this.index(ctx)
   }
 }

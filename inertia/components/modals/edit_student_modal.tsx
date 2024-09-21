@@ -97,18 +97,6 @@ const EditStudentModal = ({ isOpen, onClose, student }: EditStudentModalProps) =
               )}
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="dateOfBirth">Date of Birth</Label>
-              <Input
-                id="dateOfBirth"
-                type="dateOfBirth"
-                value={data.dateOfBirth}
-                onChange={(e) => setData('dateOfBirth', e.target.value)}
-              />
-              {errors.dateOfBirth && (
-                <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.dateOfBirth)}</p>
-              )}
-            </div>
-            <div className="flex flex-col space-y-1.5">
               <Label htmlFor="schoolId">School</Label>
               <Input
                 id="schoolId"

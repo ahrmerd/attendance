@@ -17,7 +17,7 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 export default class User extends compose(BaseModel, AuthFinder) {
   static accessTokens = DbAccessTokensProvider.forModel(User)
 
-  // currentAccessToken?: AccessToken
+  currentAccessToken?: AccessToken
 
   @column({ isPrimary: true })
   declare id: number

@@ -6,7 +6,7 @@ export default class AttendancesController {
   async index({ inertia, request, params }: HttpContext) {
 
     // const attendance = await Attendance.create({
-    //         studentId: 2, 
+    //         studentId: 1, 
     //         classId: 1,
     //         clockIn: DateTime.now(),
     //         clockOut:  DateTime.now(),
