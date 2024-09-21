@@ -26,6 +26,8 @@ export const storeStudentValidator = vine.compile(
   vine.object({
     firstName: vine.string().trim().maxLength(256),
     lastName: vine.string().trim().maxLength(256),
+    finger1: vine.string(),
+    finger2: vine.string(),
     primaryContact: vine.string().trim().maxLength(256),
     classId: vine.number().exists(async (db, value, _field) => {
       const cl = await db.from('classes').where('id', value).first()

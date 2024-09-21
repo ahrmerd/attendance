@@ -12,6 +12,7 @@ import School from '#models/school'
 export default class DownloadController {
   async index({ request, auth }: HttpContext) {
     //should add schoolId to attendance
+    //not working
     const user = await auth.user
     if (user) {
       const roles: Role[] = await user.related('role').query().exec()
@@ -26,6 +27,7 @@ export default class DownloadController {
         schools,
         classes,
         students,
+        //should also add attendance
       }
       // const teacherSchoolsClass = await Class.query().whereIn('school_id', adminschoolsId)
     }

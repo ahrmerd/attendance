@@ -32,7 +32,16 @@ export default class StudentsController {
     //should be nullable
     //add fingerprint validation
     const payload = await request.validateUsing(storeStudentValidator)
-    const student = await Student.create(payload)
+    const classs = await Class.find(payload.classId)
+    const student = await Student.create({
+      classId: payload.classId,
+      primaryContact: payload.primaryContact,
+      firstName: payload.firstName,
+      lastName: payload.firstName,
+      finger1: Buffer.from(payload.finger1),
+      finger2: Buffer.from(payload.finger2),
+      schoolId: classs?.schoolId,
+    })
     return student
   }
   async update({ request }: HttpContext) {

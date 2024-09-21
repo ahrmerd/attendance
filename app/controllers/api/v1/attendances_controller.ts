@@ -8,7 +8,7 @@ import sms_services from '#services/sms_services'
 import Attendance from '#models/attendance'
 import { DateTime } from 'luxon'
 
-export default class AttendanceController {
+export default class AttendancesController {
   async index({ request, auth }: HttpContext) {
     //should add schoolId to attendance
     const user = await auth.user

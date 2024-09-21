@@ -29,10 +29,11 @@ const createStudentsForClasses = async (school: School, classes: Class[]) => {
 }
 
 const createStaffs = async (school: School) => {
-  await UserFactory.merge({
+  const user = await UserFactory.merge({
     isSystemAdmin: false,
     phone: school.phone,
   }).create()
+  Role.create({ schoolId: school.id, userId: user.id, role: 'admin' })
   const schoolTeachers = await UserFactory.merge({ isSystemAdmin: false }).createMany(4)
   return schoolTeachers
 }

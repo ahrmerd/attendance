@@ -16,7 +16,7 @@ export default class LoginController {
         await User.accessTokens.delete(user, oldToken.identifier)
       }
       const token = await User.accessTokens.create(user)
-      return token
+      return { user, token }
     } catch (error) {
       if (error instanceof authErrors.E_INVALID_CREDENTIALS) {
         ctx.session.flash('errors', { email: 'invalid creds' })

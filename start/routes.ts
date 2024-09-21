@@ -19,6 +19,8 @@ const ClassesController = () => import('#controllers/classes_controller')
 // import StudentsController from 'app/controllers/students_controller.js'
 const StudentsController = () => import('#controllers/students_controller')
 const StudentsApiController = () => import('#controllers/api/v1/students_controller')
+const ClassesApiController = () => import('#controllers/api/v1/classes_controller')
+const AttendancesApiController = () => import('#controllers/api/v1/attendances_controller')
 const RolesController = () => import('#controllers/roles_controller')
 const UsersController = () => import('#controllers/users_controller')
 const SchoolsController = () => import('#controllers/schools_controller')
@@ -67,7 +69,9 @@ router
     router.get('schools/search', [SchoolsController, 'search']).as('schools.search')
     router.get('users/search', [UsersController, 'search']).as('users.search')
     router.resource('schools', SchoolsController).as('schools').except(['edit', 'show'])
-    router.get('users/:id/password', [UsersController, 'changePassword']).as('users.changePasswprd')
+    router
+      .post('users/:id/password', [UsersController, 'changePassword'])
+      .as('users.changePasswprd')
     router.resource('users', UsersController).as('users')
     router.resource('roles', RolesController).as('roles')
     router.on('/dashboard').renderInertia('admin/dashboard', { version: 6 }).as('dashboard')
@@ -85,6 +89,17 @@ router
     router
       .group(() => {
         router.get('/api/v1/students', [StudentsApiController, 'index']).as('students.index')
+        router.post('/api/v1/students', [StudentsApiController, 'store']).as('students.store')
+        router.get('/api/v1/classes', [ClassesApiController, 'index']).as('classes.index')
+        router
+          .get('/api/v1/attendances', [AttendancesApiController, 'index'])
+          .as('attendances.index')
+        router
+          .post('/api/v1/attendances', [AttendancesApiController, 'store'])
+          .as('attendances.store')
+        router
+          .get('/api/v1/class/:id/attendances', [AttendancesApiController, 'classIndex'])
+          .as('class.attendances')
       })
       .middleware(middleware.auth({ guards: ['api'] }))
   })
