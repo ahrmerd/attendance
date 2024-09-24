@@ -76,7 +76,7 @@ class SMSService {
     }
     // return true;
 
-    return this.sendSMS(student.primaryContact, message, student.school.name, `${student.firstName} - ${student.id}`)
+    await this.sendSMS(student.primaryContact, message, student.school.name.substring(0, 10), `${student.firstName} - ${student.id}`)
   }
 }
 
