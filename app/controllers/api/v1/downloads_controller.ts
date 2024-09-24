@@ -22,23 +22,27 @@ export default class DownloadsController {
         .map((role) => role.schoolId)
       const schools = await School.query().whereIn('id', schoolsId).exec()
       const classes = await Class.query()
-        .preload('school')
         .whereIn('school_id', adminschoolsId)
         .orWhere('teacher_id', user.id)
         .exec()
       // let classQuery = Class.query().preload('school').preload('teacher')
       // const classes = await classQuery.whereIn('id', schoolsId).exec()
-      const classesIds = classes.map((sclass) => sclass.id)
-      const students = await Student.query().whereIn('class_id', classesIds)
+      const classesXteachersIds = classes.map((sclass) => {
+        return {classId: sclass.id, teacher: sclass.teacherId}
+      })
+      const students = await Student.query().whereIn('class_id', classesXteachersIds.map(e=>e.classId))
       const studentsIds = students.map((student) => student.id)
-
-      const attendance = await Attendance.query().where('student_id', studentsIds)
+      const teachers = await User.query().whereIn('id', classesXteachersIds.map(e=>e.teacher))
+      //console.log();
+      
+      const attendances = await Attendance.query().whereIn('student_id', studentsIds)
       return {
+        teachers,
         user,
         schools,
         classes,
         students,
-        attendance,
+        attendances,
         //should also add attendance
       }
       // const teacherSchoolsClass = await Class.query().whereIn('school_id', adminschoolsId)

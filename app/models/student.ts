@@ -30,10 +30,18 @@ export default class Student extends BaseModel {
   @column()
   declare status: 'active' | 'inactive'
 
-  @column()
+  @column({
+      serialize: (value: Buffer) => {
+        return value.toString('base64')
+      },
+    })
   declare finger1: Buffer
 
-  @column()
+  @column({
+    serialize: (value: Buffer) => {
+      return value.toString('base64')
+    },
+  })
   declare finger2: Buffer
 
   @column.dateTime({ autoCreate: true })

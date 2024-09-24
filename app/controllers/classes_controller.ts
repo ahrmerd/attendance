@@ -24,7 +24,7 @@ export default class ClassesController {
     // const users = (await users_schools).map((role)=>role.user);
     // const usersId = roles?.map(role => role.userId)??[];
     classQuery = classQuery.whereIn('school_id', schoolsId)
-    console.log(await classQuery.exec())
+    //console.log(await classQuery.exec())
     const classes = await classQuery.paginate(page, 10) //why am i gettin all classes. fixed and not sure
     const schools = await School.query().whereIn('id', schoolsId)
     // const users = await User.query().whereIn('id', usersId)
