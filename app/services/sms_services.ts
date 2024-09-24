@@ -74,9 +74,9 @@ class SMSService {
     if (!student.primaryContact) {
       throw new Error('Student does not have a primary contact number')
     }
-    return true;
+    // return true;
 
-    // return this.sendSMS(student.primaryContact, message, student.school.name)
+    return this.sendSMS(student.primaryContact, message, student.school.name, `${student.firstName} - ${student.id}`)
   }
 }
 
