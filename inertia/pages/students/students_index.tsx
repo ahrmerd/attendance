@@ -11,6 +11,7 @@ import { Head, useForm } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 // import CreateUserModal from '@/components/modals/create_users_modal'
 import type StudentsController from '#controllers/students_controller'
+import Class from '#models/class'
 import Student from '#models/student'
 import PaginationComponent from '@/components/pagination_component'
 import { Input } from '@/components/ui/input'
@@ -18,6 +19,7 @@ import SchoolLayout from '@/layouts/school_layout'
 import { InferPageProps } from '@adonisjs/inertia/types'
 import { debounce } from 'lodash'
 
+import EditStudentModal from '@/components/modals/edit_student_modal'
 
 export default function StudentIndex(props: InferPageProps<StudentsController, 'index'>) {
 
@@ -27,6 +29,7 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
   const [editingUser, setEditingUser] = useState<Student | null>()
   console.log(props.students)
   const student = props.students.data as Student[]
+  const classes = props.classes as Class[]
 
   const openEditingModal = (student: Student) => {
     setEditingUser(student)
@@ -116,34 +119,38 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
                   {/* <TableCell>{student.dateOfBirth}</TableCell> */}
                   <TableCell>{student.school.name}</TableCell>
                   <TableCell>{student.class.name}</TableCell>
-                  <TableCell>{student.status}</TableCell>
+                  <TableCell>
+                  <Button className={student.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}>
+                  {student.status}
+                </Button>
+                  </TableCell>
                   <TableCell className='flex'>
                     <Button className="mr-4 " onClick={() => openEditingModal(student)}>
                       Edit
                     </Button>
-                    <Button onClick={() => openPasswordModal(student)}>Change Password</Button>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-          <PaginationComponent paginationData={props.students.meta} baseRoute="/students" />
+          <PaginationComponent paginationData={props.students.meta} baseRoute="myschools/students" />
           {/* <CreateStudentModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
             // onSubmit={handleAddUser}
           /> */}
-          {/* {editingUser && (
-            <EditUserModal
+          {editingUser && (
+            <EditStudentModal
               student={editingUser}
               isOpen={isEditModalOpen}
+              classes={classes}
               onClose={() => {
                 setEditingUser(null)
                 setIsEditModalOpen(false)
               }}
             />
-          )} */}
-         
+          )}
+        
         </div>
       </SchoolLayout>
     </>

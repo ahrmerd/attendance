@@ -25,7 +25,7 @@ interface EditRoleModalProps {
   onClose: () => void
 }
 
-export default function EditRoleModal({ isOpen, onClose, role }: EditRoleModalProps) {
+export default function EditStaffModal({ isOpen, onClose, role }: EditRoleModalProps) {
   const { data, setData, put, processing, errors, reset } = useForm({
     role: role.role,
   })

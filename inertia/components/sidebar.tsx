@@ -1,13 +1,9 @@
-import { cn } from '@/lib/utils'
-
 import { Link, usePage } from '@inertiajs/react'
 import {
   LayoutDashboardIcon,
-  PlayIcon,
   SchoolIcon,
-  SettingsIcon,
-  Telescope,
   UsersIcon,
+  WorkflowIcon
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -30,38 +26,29 @@ const navItems = [
   {
     routeName: 'roles',
     label: 'Roles',
-    icon: <PlayIcon />,
-  },
-  {
-    routeName: 'settings',
-    label: 'Settings',
-    icon: <SettingsIcon />,
+    icon: <WorkflowIcon />,
   },
 ]
 
 export function Sidebar() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true)
-
-  //   const playlists = usePage().props.playlists
+  const { url } = usePage()
 
   return (
-    <div className="pn-12">
-      <div className="py-4 space-y-4">
-        <div className="px-3 py-2">
-          {/* <h2 className="px-4 mb-2 text-lg font-semibold tracking-tight">Discover</h2> */}
-          <div className="space-y-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.routeName}
-                href={item.routeName}
-                className="flex items-center gap-4 px-3 py-2 transition-colors rounded-lg hover:bg-muted text-foreground"
-              >
-                {item.icon}
-                <span className={isSidebarExpanded ? 'block' : 'sr-only'}>{item.label}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
+    <div className="py-4">
+      <div className="py-2 space-y-2">
+        {navItems.map((item) => (
+          <Link
+            key={item.routeName}
+            href={item.routeName}
+            className={`flex items-center gap-4 px-3 py-2 transition-colors rounded-lg hover:bg-muted text-foreground ${
+              url.includes( item.routeName) ? 'bg-blue-500 text-white' : ''
+            }`}
+          >
+            {item.icon}
+            <span className={isSidebarExpanded ? 'block' : 'sr-only'}>{item.label}</span>
+          </Link>
+        ))}
       </div>
     </div>
   )

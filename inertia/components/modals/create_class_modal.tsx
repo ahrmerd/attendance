@@ -1,6 +1,15 @@
-import React, { FormEvent } from 'react';
-import { useForm } from '@inertiajs/react';
+import Role from '#models/role';
+import School from '#models/school';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -8,18 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import { convertToCapitalizedWords } from '@/lib/utils';
-import Role from '#models/role';
-import School from '#models/school';
+import { useForm } from '@inertiajs/react';
+import { FormEvent } from 'react';
 
 interface CreateClassModalProps {
   isOpen: boolean;
@@ -108,7 +108,7 @@ const schoolTeachers = teachers.filter(teacher=>teacher.schoolId== parseInt(data
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing}>
+            <Button type="submit" disabled={processing} className='mt-3'>
               Save
             </Button>
           </DialogFooter>

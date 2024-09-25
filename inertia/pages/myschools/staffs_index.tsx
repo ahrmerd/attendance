@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Table,
   TableBody,
@@ -7,22 +7,19 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Head, Link, useForm } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
+import { useState } from 'react'
 // import CreateRoleModal from '@/components/modals/create_roles_modal'
-import { InferPageProps } from '@adonisjs/inertia/types'
 import type RolesController from '#controllers/roles_controller'
 import Role from '#models/role'
-import PaginationComponent from '@/components/pagination_component'
-import { debounce } from 'lodash'
+import EditStaffModal from '@/components/modals/edit_staff_modal'
 import { Input } from '@/components/ui/input'
-import CreateRoleModal from '@/components/modals/create_role_modal'
-import { Trash2 } from 'lucide-react'
-import EditRoleModal from '@/components/modals/edit_role_modal'
-import { cn } from '@/lib/utils'
 import SchoolLayout from '@/layouts/school_layout'
+import { cn } from '@/lib/utils'
+import { InferPageProps } from '@adonisjs/inertia/types'
+import { Trash2 } from 'lucide-react'
 
-export default function RoleIndex(props: InferPageProps<RolesController, 'index'>) {
+export default function StaffsIndex(props: InferPageProps<RolesController, 'index'>) {
   // const [roles, setRole] = useState<Role[]>([
   //   { id: 1, name: 'Springfield Elementary', address: '123 Role St', phone: '555-1234' },
   //   { id: 2, name: 'Central High', address: '456 Education Ave', phone: '555-5678' },
@@ -30,22 +27,40 @@ export default function RoleIndex(props: InferPageProps<RolesController, 'index'
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [editingRole, setEditingRole] = useState<Role | null>()
-  const roles = props.roles.data as Role[]
+  const [search, setSearch] = useState('')
+  const roles = props.roles as Role[]
 
   const openEditingModal = (role: Role) => {
     setEditingRole(role)
     setIsEditModalOpen(true)
   }
 
-  const { data, setData, get } = useForm({
-    search: '',
-    page: props.roles.meta.currentPage,
-  })
+  const filteredRoles = () => {
+    return roles.filter((role) => {
+      const searchText = search.toLowerCase(); // Assuming 'search' is the state
+      return (
+        role.role.toLowerCase().includes(searchText) || // Search in role name
+        role.user.fullName.toLowerCase().includes(searchText) || // Search in user name
+        role.user.email.toLowerCase().includes(searchText) || // Search in user name
+        role.user.phone?.toLowerCase().includes(searchText) || // Search in user name
+        role.school.name.toLowerCase().includes(searchText)|| // Search in school name
+        role.school.email?.toLowerCase().includes(searchText) ||// Search in school name
+        role.school.phone?.toLowerCase().includes(searchText) ||// Search in school name
+        role.school.address.toLowerCase().includes(searchText) // Search in school name
+      );
+    });
+  };
+  
 
-  useEffect(() => {
-    debouncedGet()
-    return debouncedGet.cancel
-  }, [data.search])
+  // const { data, setData, get } = useForm({
+  //   search: '',
+  //   page: props.roles.meta.currentPage,
+  // })
+
+  // useEffect(() => {
+  //   debouncedGet()
+  //   return debouncedGet.cancel
+  // }, [data.search])
 
   // const debouncedSearch = useCallback(
   //   debounce((query: string) => {
@@ -58,13 +73,13 @@ export default function RoleIndex(props: InferPageProps<RolesController, 'index'
   //   }, 300),
   //   []
   // )
-  const debouncedGet = debounce(() => {
-    get('/myschools/roles', {
-      preserveState: true,
-      preserveScroll: true,
-      only: ['roles'],
-    })
-  }, 300)
+  // const debouncedGet = debounce(() => {
+  //   get('/myschools/staffs', {
+  //     preserveState: true,
+  //     preserveScroll: true,
+  //     only: ['roles'],
+  //   })
+  // }, 300)
 
   // const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   const query = e.target.value
@@ -77,15 +92,13 @@ export default function RoleIndex(props: InferPageProps<RolesController, 'index'
       <Head title="Homepage" />
       <SchoolLayout>
         <div className="container p-4 mx-auto">
-          <h1 className="mb-4 text-2xl font-bold">Role List</h1>
-          <Button className="mb-4" onClick={() => setIsModalOpen(true)}>
-            Add New Role
-          </Button>
+          <h1 className="mb-4 text-2xl font-bold">Staff List</h1>
+         
           <Input
             type="text"
-            placeholder="Search roles..."
-            value={data.search}
-            onChange={(e) => setData('search', e.target.value)}
+            placeholder="Search staffs..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="max-w-xs"
           />
           <Table>
@@ -102,7 +115,7 @@ export default function RoleIndex(props: InferPageProps<RolesController, 'index'
               </TableRow>
             </TableHeader>
             <TableBody>
-              {roles.map((role) => (
+              {filteredRoles().map((role) => (
                 <TableRow key={role.id}>
                   <TableCell>{role.user.id}</TableCell>
                   <TableCell>{role.user.fullName}</TableCell>
@@ -129,14 +142,10 @@ export default function RoleIndex(props: InferPageProps<RolesController, 'index'
               ))}
             </TableBody>
           </Table>
-          <PaginationComponent paginationData={props.roles.meta} baseRoute="/roles" />
-          <CreateRoleModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            // onSubmit={handleAddRole}
-          />
+          {/* <PaginationComponent paginationData={props.roles.meta} baseRoute="/roles" /> */}
+         
           {editingRole && (
-            <EditRoleModal
+            <EditStaffModal
               role={editingRole}
               isOpen={isEditModalOpen}
               onClose={() => {

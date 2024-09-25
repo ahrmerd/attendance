@@ -1,26 +1,18 @@
-import React, { ChangeEvent, FormEvent } from 'react'
-import { useForm } from '@inertiajs/react'
+import User from '#models/user'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog'
-import User from '#models/user'
-import { DialogDescription } from '@radix-ui/react-dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { convertToCapitalizedWords } from '@/lib/utils'
+import { useForm } from '@inertiajs/react'
 import { BadgeXIcon, VerifiedIcon } from 'lucide-react'
+import { FormEvent } from 'react'
 // import User from '#models/user'
 
 interface ChangeUserPasswordModalProps {
@@ -57,21 +49,12 @@ export default function ChangeUserPasswordModal({
         <DialogHeader>
           <DialogTitle>
             Edit User:
-            <span>{user.fullName}</span>
+            <span className='ml-3'>{user.fullName}</span>
           </DialogTitle>
-          {/* <DialogDescription></DialogDescription> */}
         </DialogHeader>
         <p>
-          <span>Email</span>
+          <span className='font-bold mr-2'>Email:</span>
           {user.email}
-        </p>
-        <p>
-          <span>Name</span>
-          {user.fullName}
-        </p>
-        <p>
-          <span>Email</span>
-          {user.phone}
         </p>
         <p>{user.isSystemAdmin ? <VerifiedIcon /> : <BadgeXIcon />}</p>
         <form onSubmit={changeName}>
@@ -99,7 +82,7 @@ export default function ChangeUserPasswordModal({
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing}>
+            <Button type="submit" disabled={processing} className='mt-3'>
               Save
             </Button>
           </DialogFooter>

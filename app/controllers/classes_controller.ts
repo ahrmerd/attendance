@@ -1,10 +1,9 @@
 // import type { HttpContext } from '@adonisjs/core/http'
-import type { HttpContext } from '@adonisjs/core/http'
 import Class from '#models/class'
-import { editClassValidator, registerClassValidator } from '#validators/class_validator'
-import School from '#models/school'
-import User from '#models/user'
 import Role from '#models/role'
+import School from '#models/school'
+import { editClassValidator, registerClassValidator } from '#validators/class_validator'
+import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ClassesController {
   async index({ inertia, request, auth }: HttpContext) {
@@ -15,7 +14,11 @@ export default class ClassesController {
     let classQuery = Class.query().preload('school').preload('teacher')
     if (search) {
       classQuery = classQuery
-        .where('name', 'like', `%${search}%`)
+        .orWhereHas('school', (schoolQuery)=>{
+          schoolQuery.orWhere('name', 'like', `%${search}%`)
+        })
+        
+        .orWhere('name', 'like', `%${search}%`)
         .orWhere('teacherId', 'like', `%${search}%`)
         .orWhere('schoolId', 'like', `%${search}%`)
     }
@@ -24,7 +27,7 @@ export default class ClassesController {
     // const users = (await users_schools).map((role)=>role.user);
     // const usersId = roles?.map(role => role.userId)??[];
     classQuery = classQuery.whereIn('school_id', schoolsId)
-    console.log(await classQuery.exec())
+    // console.log(await classQuery.exec())
     const classes = await classQuery.paginate(page, 10) //why am i gettin all classes. fixed and not sure
     const schools = await School.query().whereIn('id', schoolsId)
     // const users = await User.query().whereIn('id', usersId)
@@ -46,10 +49,12 @@ export default class ClassesController {
   }
 
   async update({ params, request, response }: HttpContext) {
-    const user = await Class.findOrFail(params.id)
+    const classs = await Class.findOrFail(params.id)
     const payload = await request.validateUsing(editClassValidator)
-    user.merge(payload)
-    await user.save()
+    // console.log(payload);
+    // return;
+    classs.merge(payload)
+    await classs.save()
     return response.redirect().back()
   }
 

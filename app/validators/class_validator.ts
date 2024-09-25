@@ -10,7 +10,7 @@ export const  registerClassValidator = vine.compile(
 
 export const editClassValidator = vine.compile(
     vine.object({
-        schoolId: vine.number(),
+        //classId: vine.number(),
         name: vine.string().trim().minLength(4),
         teacherId: vine.number(),
     })
