@@ -1,7 +1,13 @@
-import React, { FormEvent, useState } from 'react'
-import { useForm } from '@inertiajs/react'
-import axios from 'axios'
 import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -9,16 +15,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from '@/components/ui/dialog'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 import { convertToCapitalizedWords } from '@/lib/utils'
+import { useForm } from '@inertiajs/react'
+import axios from 'axios'
+import { FormEvent, useState } from 'react'
 
 interface CreateRoleModalProps {
   isOpen: boolean
@@ -168,7 +168,7 @@ export default function CreateRoleModal({ isOpen, onClose }: CreateRoleModalProp
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing}>
+            <Button type="submit" disabled={processing} className="mt-3">
               Save
             </Button>
           </DialogFooter>

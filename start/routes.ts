@@ -13,12 +13,12 @@ const RegisterUsersController = () => import('#controllers/register_users_contro
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
-import User from '#models/user'
 // import AttendancesController from 'app/controllers/attendances_controller.js'
 const ClassesController = () => import('#controllers/classes_controller')
 // import StudentsController from 'app/controllers/students_controller.js'
 const StudentsController = () => import('#controllers/students_controller')
 const StudentsApiController = () => import('#controllers/api/v1/students_controller')
+const DashboardController = () => import('#controllers/dashboard_controller')
 const ClassesApiController = () => import('#controllers/api/v1/classes_controller')
 const AttendancesApiController = () => import('#controllers/api/v1/attendances_controller')
 const DownloadsApiController = () => import('#controllers/api/v1/downloads_controller')
@@ -43,7 +43,8 @@ router
 
 router
   .group(() => {
-    router.on('/myschools').renderInertia('myschools/my_school_dashboard').as('myschools')
+    router.get('/myschools/dashboard', [DashboardController, 'schoolDashboard']).as('myschools')
+    // router.on('/myschools').renderInertia('myschools/my_school_dashboard').as('myschools')
     router.resource('/myschools/classes', ClassesController).as('classes')
     router.resource('/myschools/students', StudentsController).as('students')
 
@@ -53,33 +54,35 @@ router
     router
       .get('/myschools/classes/:id/students', [StudentsController, 'classStudents'])
       .as('classes.students')
-    router.resource('/myschools/roles', SchoolRoleController).as('school_role')
+    router.resource('/myschools/staffs', SchoolRoleController).as('school_role')
     //roles for schools
     //attendance
     // router.resource('/myschools/students', StudentsController).as('students')
   })
   .middleware(middleware.schoolAuth())
-
 router
   .group(() => {
-    User
     router.on('not-school').renderInertia('not_school').as('notSchool')
     router.on('not-admin').renderInertia('not_admin').as('notAdmin')
-
     router.post('/logout', [LoginUsersController, 'logout']).as('logout')
+  })
+  .middleware(middleware.auth())
+router
+  .group(() => {
+    //User
+
+    // router.post('/logout', [LoginUsersController, 'logout']).as('logout')
+    router.get('/dashboard', [DashboardController, 'index']).as('dashboard')
     router.get('schools/search', [SchoolsController, 'search']).as('schools.search')
     router.get('users/search', [UsersController, 'search']).as('users.search')
     router.resource('schools', SchoolsController).as('schools').except(['edit', 'show'])
-    router
-      .post('users/:id/password', [UsersController, 'changePassword'])
-      .as('users.changePasswprd')
+    router.put('users/:id/password', [UsersController, 'changePassword']).as('users.changePassword')
     router.resource('users', UsersController).as('users')
     router.resource('roles', RolesController).as('roles')
-    router.on('/dashboard').renderInertia('admin/dashboard', { version: 6 }).as('dashboard')
-
+    // router.on('/dashboard').renderInertia('admin/dashboard', { version: 6 }).as('dashboard')
     // router.get('/dashboard', )
   })
-  .middleware(middleware.auth())
+  .middleware(middleware.adminAuth())
 
 //api routes
 router

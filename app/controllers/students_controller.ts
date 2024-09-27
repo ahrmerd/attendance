@@ -1,8 +1,7 @@
-import type { HttpContext } from '@adonisjs/core/http'
-import Student from '#models/student'
 import Class from '#models/class'
+import Student from '#models/student'
 import { editStudentValidator } from '#validators/student_validator'
-import { DateTime } from 'luxon'
+import type { HttpContext } from '@adonisjs/core/http'
 
 export default class StudentsController {
   async index({ inertia, request, auth, response }: HttpContext) {
@@ -22,11 +21,20 @@ export default class StudentsController {
         .where('first_name', 'like', `%${search}%`)
         .orWhere('last_name', 'like', `%${search}%`)
         .orWhere('primary_contact', 'like', `%${search}%`)
+        .orWhereHas('school', (schoolQuery) => {
+          schoolQuery.where('name', 'like', `%${search}%`)
+        })
+        .orWhereHas('class', (classQuery) => {
+          classQuery.where('name', 'like', `%${search}%`)
+        })
     }
     const students = await studentsQuery.paginate(page)
-
+    let classes = await Class.query().whereIn('school_id', schoolsId).exec()
+    // let schools = await School.query().whereIn('id', schoolsId).exec();
     return inertia.render('students/students_index', {
-      students: students,
+      students,
+      classes,
+      // schools,
     })
   }
 
@@ -63,7 +71,7 @@ export default class StudentsController {
 
     //console.log(classDetails);
     let studentsQuery = Student.query()
-      .where('class_id', classId)
+      // .where('class_id', classId)
       .preload('school')
       .preload('class')
 

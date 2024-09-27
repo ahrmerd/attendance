@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { Button } from '@/components/ui/button'
 import {
   Table,
   TableBody,
@@ -7,19 +7,19 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Button } from '@/components/ui/button'
-import AdminLayout from '@/layouts/admin_layout'
-import { Head, router, useForm } from '@inertiajs/react'
+import { Head, useForm } from '@inertiajs/react'
+import { useEffect, useState } from 'react'
 // import CreateUserModal from '@/components/modals/create_users_modal'
-import { InferPageProps } from '@adonisjs/inertia/types'
 import type StudentsController from '#controllers/students_controller'
+import Class from '#models/class'
 import Student from '#models/student'
-import { BadgeXIcon, VerifiedIcon } from 'lucide-react'
 import PaginationComponent from '@/components/pagination_component'
-import { debounce } from 'lodash'
 import { Input } from '@/components/ui/input'
-import CreateStudentModal from '@/components/modals/create_student_modal'
 import SchoolLayout from '@/layouts/school_layout'
+import { InferPageProps } from '@adonisjs/inertia/types'
+import { debounce } from 'lodash'
+
+import EditStudentModal from '@/components/modals/edit_student_modal'
 
 export default function StudentIndex(props: InferPageProps<StudentsController, 'index'>) {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -28,6 +28,7 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
   const [editingUser, setEditingUser] = useState<Student | null>()
   console.log(props.students)
   const student = props.students.data as Student[]
+  const classes = props.classes as Class[]
 
   const openEditingModal = (mstudent: Student) => {
     setEditingUser(mstudent)
@@ -117,33 +118,45 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
                   {/* <TableCell>{student.dateOfBirth}</TableCell> */}
                   <TableCell>{mstudent.school.name}</TableCell>
                   <TableCell>{mstudent.class.name}</TableCell>
-                  <TableCell>{mstudent.status}</TableCell>
+
+                  <TableCell>
+                    <Button
+                      className={mstudent.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}
+                    >
+                      {mstudent.status}
+                    </Button>
+                  </TableCell>
+
                   <TableCell className="flex">
                     <Button className="mr-4 " onClick={() => openEditingModal(mstudent)}>
                       Edit
                     </Button>
-                    <Button onClick={() => openPasswordModal(mstudent)}>Change Password</Button>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-          <PaginationComponent paginationData={props.students.meta} baseRoute="/students" />
+          <PaginationComponent
+            paginationData={props.students.meta}
+            baseRoute="myschools/students"
+          />
           {/* <CreateStudentModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
             // onSubmit={handleAddUser}
           /> */}
-          {/* {editingUser && (
-            <EditUserModal
+          {editingUser && (
+            <EditStudentModal
               student={editingUser}
               isOpen={isEditModalOpen}
+              classes={classes}
               onClose={() => {
                 setEditingUser(null)
                 setIsEditModalOpen(false)
               }}
             />
-          )} */}
+          )}
+
         </div>
       </SchoolLayout>
     </>

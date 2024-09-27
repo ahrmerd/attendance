@@ -1,23 +1,16 @@
-import React, { ChangeEvent, FormEvent } from 'react'
-import { useForm } from '@inertiajs/react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog'
-import { Label } from '../ui/label'
+import { Input } from '@/components/ui/input'
 import { convertToCapitalizedWords } from '@/lib/utils'
+import { useForm } from '@inertiajs/react'
+import { FormEvent } from 'react'
+import { Label } from '../ui/label'
 
 interface CreateUserModalProps {
   isOpen: boolean
@@ -98,7 +91,7 @@ export default function CreateUserModal({ isOpen, onClose }: CreateUserModalProp
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing}>
+            <Button type="submit" disabled={processing} className="mt-2">
               Save
             </Button>
           </DialogFooter>

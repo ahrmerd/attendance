@@ -1,22 +1,30 @@
-import AdminLayout from '@/layouts/admin_layout'
 import { Button } from '@/components/ui/button'
 import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
 } from '@/components/ui/card'
-import { TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'
+import AdminLayout from '@/layouts/admin_layout'
+// import { TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'
 // import router from '@adonisjs/core/services/router'
-import { Head, Link, router } from '@inertiajs/react'
-import { Table, Badge } from 'lucide-react'
-interface DashboardProps {
-  version: number
-}
+import DashboardController from '#controllers/dashboard_controller'
+import { InferPageProps } from '@adonisjs/inertia/types'
+import { Head, Link } from '@inertiajs/react'
+// import { Table, Badge } from 'lucide-react'
 
-export default function Dashboard(props: DashboardProps) {
+// interface DashboardProps {
+//   version: number
+// }
+
+export default function Dashboard(props: InferPageProps<DashboardController, 'index'>) {
+  const schools = props.schools
+  const roles = props.roles
+  const users = props.users
+  const version = props.version
+
   return (
     <>
       <Head title="Homepage" />
@@ -29,7 +37,7 @@ export default function Dashboard(props: DashboardProps) {
                 <CardDescription>Total number of schools in the system.</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold">125</div>
+                <div className="text-4xl font-bold">{schools}</div>
               </CardContent>
               <CardFooter>
                 <Button variant="outline">
@@ -43,10 +51,12 @@ export default function Dashboard(props: DashboardProps) {
                 <CardDescription>Total number of active users in the system.</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold">3,450</div>
+                <div className="text-4xl font-bold">{users}</div>
               </CardContent>
               <CardFooter>
-                <Button variant="outline">Manage Users</Button>
+                <Button variant="outline">
+                  <Link href="/users">Manage Users</Link>
+                </Button>
               </CardFooter>
             </Card>
             <Card>
@@ -67,10 +77,12 @@ export default function Dashboard(props: DashboardProps) {
                 <CardDescription>Total number of roles in the system.</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold">15</div>
+                <div className="text-4xl font-bold">{roles}</div>
               </CardContent>
               <CardFooter>
-                <Button variant="outline">Manage Roles</Button>
+                <Button variant="outline">
+                  <Link href="/roles">Manage Roles</Link>
+                </Button>
               </CardFooter>
             </Card>
           </div>

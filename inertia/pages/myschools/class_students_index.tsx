@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react'
-import { InferPageProps } from '@adonisjs/inertia/types'
 import StudentController from '#controllers/students_controller'
-import { Head, useForm } from '@inertiajs/react'
-import SchoolLayout from '@/layouts/school_layout'
+import Class from '#models/class'
+import Student from '#models/student'
+import EditStudentModal from '@/components/modals/edit_student_modal'
+import PaginationComponent from '@/components/pagination_component'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import {
   Table,
   TableBody,
@@ -11,13 +13,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import EditStudentModal from '@/components/modals/edit_student_modal'
-import Student from '#models/student'
-import Class from '#models/class'
-import PaginationComponent from '@/components/pagination_component'
+import SchoolLayout from '@/layouts/school_layout'
+import { InferPageProps } from '@adonisjs/inertia/types'
+import { Head, useForm } from '@inertiajs/react'
 import { debounce } from 'lodash'
+import { useEffect, useState } from 'react'
 
 export default function ClassStudentIndex(
   props: InferPageProps<StudentController, 'classStudents'>
@@ -90,7 +90,13 @@ export default function ClassStudentIndex(
                   <TableCell>{student.lastName}</TableCell>
                   <TableCell>{student.class.name}</TableCell>
                   <TableCell>{student.primaryContact}</TableCell>
-                  <TableCell>{student.status}</TableCell>
+                  <TableCell>
+                    <Button
+                      className={student.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}
+                    >
+                      {student.status}
+                    </Button>
+                  </TableCell>
                   <TableCell>
                     <Button onClick={() => openEditingModal(student)}>Edit</Button>
                   </TableCell>

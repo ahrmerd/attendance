@@ -118,10 +118,12 @@ export default function UserIndex(props: InferPageProps<UserController, 'index'>
                   <TableCell>{user.phone}</TableCell>
                   <TableCell>{user.isSystemAdmin ? <VerifiedIcon /> : <BadgeXIcon />}</TableCell>
                   <TableCell>
-                    <Button className="mr-4 " onClick={() => openEditingModal(user)}>
-                      Edit
-                    </Button>
-                    <Button onClick={() => openPasswordModal(user)}>Change Password</Button>
+                    <div className="flex">
+                      <Button className="mr-4 " onClick={() => openEditingModal(user)}>
+                        Edit
+                      </Button>
+                      <Button onClick={() => openPasswordModal(user)}>Change Password</Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

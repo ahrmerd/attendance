@@ -1,5 +1,5 @@
+import Class from '#models/class'
 import Role from '#models/role'
-import School from '#models/school'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-
 import {
   Select,
   SelectContent,
@@ -22,34 +21,31 @@ import { convertToCapitalizedWords } from '@/lib/utils'
 import { useForm } from '@inertiajs/react'
 import { FormEvent } from 'react'
 
-
-interface CreateClassModalProps {
+interface EditClassModalProps {
   isOpen: boolean
   onClose: () => void
-  schools: School[]
+  classs: Class
   teachers: Role[]
 }
 
-export default function CreateClassModal({
+export default function EditClassModal({
   isOpen,
   onClose,
-  schools,
+  classs: classData,
   teachers,
-}: CreateClassModalProps) {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    name: '',
-    schoolId: '',
-    teacherId: '',
+}: EditClassModalProps) {
+  const { data, setData, put, processing, errors, reset } = useForm({
+    name: classData.name,
+    teacherId: classData.teacherId,
   })
-  console.log(teachers)
 
-  const schoolTeachers = teachers.filter(
-    (teacher) => teacher.schoolId === Number.parseInt(data.schoolId)
-  )
+  const handleTeacherChange = (value: string) => {
+    setData('teacherId', Number.parseInt(value))
+  }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    post('/myschools/classes', {
+    put(`/myschools/classes/${classData.id}`, {
       preserveState: true,
       preserveScroll: true,
       onSuccess: () => {
@@ -63,7 +59,7 @@ export default function CreateClassModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add New Class</DialogTitle>
+          <DialogTitle>Edit Class: {classData.name}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid items-center w-full gap-4">
@@ -73,44 +69,25 @@ export default function CreateClassModal({
                 id="name"
                 value={data.name}
                 onChange={(e) => setData('name', e.target.value)}
-                placeholder="Enter class name"
               />
               {errors.name && (
                 <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.name)}</p>
               )}
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="schoolId">School</Label>
-              <Select value={data.schoolId} onValueChange={(value) => setData('schoolId', value)}>
-                <SelectTrigger id="schoolId">
-                  <SelectValue placeholder="Select a school" />
-                </SelectTrigger>
-                <SelectContent>
-                  {schools.map((school) => (
-                    <SelectItem key={school.id} value={school.id.toString()}>
-                      {school.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {errors.schoolId && (
-                <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.schoolId)}</p>
-              )}
-            </div>
-            <div className="flex flex-col space-y-1.5">
               <Label htmlFor="teacherId">Teacher</Label>
               <Select
-                disabled={schoolTeachers.length === 0}
-                value={data.teacherId}
-                onValueChange={(value) => setData('teacherId', value)}
+                defaultValue={data.teacherId.toString()}
+                // value={data.teacherId ? data.teacherId.toString() : ''}
+                onValueChange={handleTeacherChange}
               >
-                <SelectTrigger id="teacherId">
+                <SelectTrigger>
                   <SelectValue placeholder="Select a teacher" />
                 </SelectTrigger>
                 <SelectContent>
-                  {schoolTeachers.map((teacher) => (
+                  {teachers.map((teacher) => (
                     <SelectItem key={teacher.user.id} value={teacher.user.id.toString()}>
-                      {teacher.user.fullName}
+                      {teacher.user?.fullName || 'Unknown Teacher'}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -124,7 +101,7 @@ export default function CreateClassModal({
           </div>
           <DialogFooter>
             <Button type="submit" disabled={processing} className="mt-3">
-              Save
+              Save Changes
             </Button>
           </DialogFooter>
         </form>

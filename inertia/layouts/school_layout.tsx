@@ -3,35 +3,24 @@
  * @see https://v0.dev/t/epdraLqQ0gy
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-} from '@/components/ui/dropdown-menu'
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select'
-import { BookIcon, LayoutDashboardIcon, MenuIcon, Users2, Users2Icon } from 'lucide-react'
-import { SchoolSidebar } from '@/components/school_sidebar'
-import { Sidebar } from '@/components/sidebar'
-import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet'
-import { ReactNode } from 'react'
-import { Link, usePage } from '@inertiajs/react'
-import { ThemeToggle, useTheme } from '@/contexts/theme_context'
 import User from '#models/user'
 import { UserAvatar } from '@/components/icons'
+import { SchoolSidebar } from '@/components/school_sidebar'
+import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { ThemeToggle, useTheme } from '@/contexts/theme_context'
+import { Link, usePage } from '@inertiajs/react'
+import { LayoutDashboardIcon, MenuIcon } from 'lucide-react'
+import { ReactNode } from 'react'
+
 
 interface SchoolLayoutProps {
   children: ReactNode
@@ -41,7 +30,8 @@ export default function SchoolLayout({ children }: SchoolLayoutProps) {
   const theme = useTheme()
   return (
     <div className="flex flex-col w-full min-h-screen bg-muted/40 dark:bg-gray-950">
-      <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-background px-4 sm:px-6">
+      <header className="flex items-center justify-between h-16 px-6 border-b dark:border-gray-800 dark:bg-gray-900">
+
         <div className="flex items-center gap-4">
           <Button size="icon" variant="ghost" className="sm:hidden">
             <LayoutDashboardIcon />
@@ -77,7 +67,7 @@ export default function SchoolLayout({ children }: SchoolLayoutProps) {
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link href="logout" method="post" as="button">
+                <Link href="/logout" method="post" as="button">
                   Logout
                 </Link>
               </DropdownMenuItem>
