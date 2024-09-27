@@ -34,10 +34,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               Attendance
             </span>
           </Link>
-       
         </div>
         <div className="flex items-center gap-4">
-        <Link href="/myschools/dashboard">
+          <Link href="/myschools/dashboard">
             <Button>School Management</Button>
           </Link>
           <DropdownMenu>

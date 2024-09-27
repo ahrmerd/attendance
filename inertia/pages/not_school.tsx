@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Link } from "@inertiajs/react"
-import { AlertCircle } from "lucide-react"
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Link } from '@inertiajs/react'
+import { AlertCircle } from 'lucide-react'
 
 export default function NotAssociatedPage() {
   return (
@@ -18,14 +18,14 @@ export default function NotAssociatedPage() {
             You are not currently associated with any school in our system.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-500">
-            To access this feature, you need to be linked to a registered school. Please contact your school administrator or our support team for assistance.
+            To access this feature, you need to be linked to a registered school. Please contact
+            your school administrator or our support team for assistance.
           </p>
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4">
           <Button asChild>
             <Link href="/login">Go to Dashboard</Link>
           </Button>
-          
         </CardFooter>
       </Card>
     </div>

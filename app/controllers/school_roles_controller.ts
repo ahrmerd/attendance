@@ -1,14 +1,14 @@
-import School from '#models/school';
-import type { HttpContext } from '@adonisjs/core/http';
+import School from '#models/school'
+import type { HttpContext } from '@adonisjs/core/http'
 
-import Role from '#models/role';
-import { addRoleValidator, editRoleValidator } from '#validators/roles_validator';
+import Role from '#models/role'
+import { addRoleValidator, editRoleValidator } from '#validators/roles_validator'
 
 export default class RolesController {
   async index({ inertia, request, auth }: HttpContext) {
-    const authUserRoles : Role[] = await auth.user?.related('role').query().exec()
-    const schoolsId = authUserRoles?.map(role => role.schoolId) ?? [];
-    const usersId = authUserRoles?.map(role => role.userId) ?? [];
+    const authUserRoles: Role[] = await auth.user?.related('role').query().exec()
+    const schoolsId = authUserRoles?.map((role) => role.schoolId) ?? []
+    const usersId = authUserRoles?.map((role) => role.userId) ?? []
     // const schoolTeachers = (await Role.query()
     // .whereIn('school_id', schoolsId)
     // .preload('user').exec())
@@ -39,9 +39,8 @@ export default class RolesController {
     //     //.where('role', 'like', `%${search}%`)
     // }
     query.whereIn('school_id', schoolsId)
-    console.log(query.toQuery());
+    console.log(query.toQuery())
 
-    
     // const staffs = await Role.query().whereIn('school_id', schoolsId).preload('user').exec()
     const schools = await School.query().whereIn('id', schoolsId)
     const users = await School.query().whereIn('id', schoolsId)

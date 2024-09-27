@@ -50,19 +50,19 @@ export default function EditStaffModal({ isOpen, onClose, role }: EditRoleModalP
         </DialogHeader>
         <div>
           <p>
-            <span className='font-bold mr-3'>Email:</span>
+            <span className="font-bold mr-3">Email:</span>
             {role.user.email}
           </p>
           <p>
-            <span className='font-bold mr-3'>User Name:</span>
+            <span className="font-bold mr-3">User Name:</span>
             {role.user.fullName}
           </p>
           {/* <p> */}
-            {/* <span className='font-bold mr-3'>Phone No:</span>
+          {/* <span className='font-bold mr-3'>Phone No:</span>
             {role.user.phone}
           </p> */}
           <p>
-            <span className='font-bold mr-3'>School Name:</span>
+            <span className="font-bold mr-3">School Name:</span>
             {role.school.name}
           </p>
           {/* <p>
@@ -103,7 +103,7 @@ export default function EditStaffModal({ isOpen, onClose, role }: EditRoleModalP
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing} className='mt-3'>
+            <Button type="submit" disabled={processing} className="mt-3">
               Save
             </Button>
           </DialogFooter>

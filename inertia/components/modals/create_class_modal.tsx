@@ -1,54 +1,61 @@
-import Role from '#models/role';
-import School from '#models/school';
-import { Button } from '@/components/ui/button';
+import Role from '#models/role'
+import School from '#models/school'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { convertToCapitalizedWords } from '@/lib/utils';
-import { useForm } from '@inertiajs/react';
-import { FormEvent } from 'react';
+} from '@/components/ui/select'
+import { convertToCapitalizedWords } from '@/lib/utils'
+import { useForm } from '@inertiajs/react'
+import { FormEvent } from 'react'
 
 interface CreateClassModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  schools: School[];
-  teachers: Role[];
+  isOpen: boolean
+  onClose: () => void
+  schools: School[]
+  teachers: Role[]
 }
 
-export default function CreateClassModal({ isOpen, onClose, schools, teachers }: CreateClassModalProps) {
+export default function CreateClassModal({
+  isOpen,
+  onClose,
+  schools,
+  teachers,
+}: CreateClassModalProps) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
     schoolId: '',
     teacherId: '',
-  });
-console.log(teachers);
+  })
+  console.log(teachers)
 
-const schoolTeachers = teachers.filter(teacher=>teacher.schoolId== parseInt(data.schoolId));
+  const schoolTeachers = teachers.filter(
+    (teacher) => teacher.schoolId === Number.parseInt(data.schoolId)
+  )
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     post('/myschools/classes', {
       preserveState: true,
       preserveScroll: true,
       onSuccess: () => {
-        reset();
-        onClose();
+        reset()
+        onClose()
       },
-    });
-  };
+    })
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -90,12 +97,16 @@ const schoolTeachers = teachers.filter(teacher=>teacher.schoolId== parseInt(data
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="teacherId">Teacher</Label>
-              <Select disabled={schoolTeachers.length==0} value={data.teacherId} onValueChange={(value) => setData('teacherId', value)}>
+              <Select
+                disabled={schoolTeachers.length === 0}
+                value={data.teacherId}
+                onValueChange={(value) => setData('teacherId', value)}
+              >
                 <SelectTrigger id="teacherId">
                   <SelectValue placeholder="Select a teacher" />
                 </SelectTrigger>
                 <SelectContent>
-                  { schoolTeachers.map((teacher) => (
+                  {schoolTeachers.map((teacher) => (
                     <SelectItem key={teacher.user.id} value={teacher.user.id.toString()}>
                       {teacher.user.fullName}
                     </SelectItem>
@@ -103,17 +114,19 @@ const schoolTeachers = teachers.filter(teacher=>teacher.schoolId== parseInt(data
                 </SelectContent>
               </Select>
               {errors.teacherId && (
-                <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.teacherId)}</p>
+                <p className="text-sm text-red-500">
+                  {convertToCapitalizedWords(errors.teacherId)}
+                </p>
               )}
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing} className='mt-3'>
+            <Button type="submit" disabled={processing} className="mt-3">
               Save
             </Button>
           </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

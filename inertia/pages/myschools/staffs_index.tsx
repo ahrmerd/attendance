@@ -37,20 +37,19 @@ export default function StaffsIndex(props: InferPageProps<RolesController, 'inde
 
   const filteredRoles = () => {
     return roles.filter((role) => {
-      const searchText = search.toLowerCase(); // Assuming 'search' is the state
+      const searchText = search.toLowerCase() // Assuming 'search' is the state
       return (
         role.role.toLowerCase().includes(searchText) || // Search in role name
         role.user.fullName.toLowerCase().includes(searchText) || // Search in user name
         role.user.email.toLowerCase().includes(searchText) || // Search in user name
         role.user.phone?.toLowerCase().includes(searchText) || // Search in user name
-        role.school.name.toLowerCase().includes(searchText)|| // Search in school name
-        role.school.email?.toLowerCase().includes(searchText) ||// Search in school name
-        role.school.phone?.toLowerCase().includes(searchText) ||// Search in school name
+        role.school.name.toLowerCase().includes(searchText) || // Search in school name
+        role.school.email?.toLowerCase().includes(searchText) || // Search in school name
+        role.school.phone?.toLowerCase().includes(searchText) || // Search in school name
         role.school.address.toLowerCase().includes(searchText) // Search in school name
-      );
-    });
-  };
-  
+      )
+    })
+  }
 
   // const { data, setData, get } = useForm({
   //   search: '',
@@ -93,7 +92,7 @@ export default function StaffsIndex(props: InferPageProps<RolesController, 'inde
       <SchoolLayout>
         <div className="container p-4 mx-auto">
           <h1 className="mb-4 text-2xl font-bold">Staff List</h1>
-         
+
           <Input
             type="text"
             placeholder="Search staffs..."
@@ -143,7 +142,7 @@ export default function StaffsIndex(props: InferPageProps<RolesController, 'inde
             </TableBody>
           </Table>
           {/* <PaginationComponent paginationData={props.roles.meta} baseRoute="/roles" /> */}
-         
+
           {editingRole && (
             <EditStaffModal
               role={editingRole}

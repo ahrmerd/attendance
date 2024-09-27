@@ -14,10 +14,10 @@ export default class ClassesController {
     let classQuery = Class.query().preload('school').preload('teacher')
     if (search) {
       classQuery = classQuery
-        .orWhereHas('school', (schoolQuery)=>{
+        .orWhereHas('school', (schoolQuery) => {
           schoolQuery.orWhere('name', 'like', `%${search}%`)
         })
-        
+
         .orWhere('name', 'like', `%${search}%`)
         .orWhere('teacherId', 'like', `%${search}%`)
         .orWhere('schoolId', 'like', `%${search}%`)

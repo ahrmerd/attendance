@@ -42,7 +42,7 @@ router
 
 router
   .group(() => {
-    router.get('/myschools/dashboard', [DashboardController,'schoolDashboard']).as('myschools')
+    router.get('/myschools/dashboard', [DashboardController, 'schoolDashboard']).as('myschools')
     // router.on('/myschools').renderInertia('myschools/my_school_dashboard').as('myschools')
     router.resource('/myschools/classes', ClassesController).as('classes')
     router.resource('/myschools/students', StudentsController).as('students')
@@ -59,26 +59,23 @@ router
     // router.resource('/myschools/students', StudentsController).as('students')
   })
   .middleware(middleware.schoolAuth())
-  router.group(()=>{
+router
+  .group(() => {
     router.on('not-school').renderInertia('not_school').as('notSchool')
     router.on('not-admin').renderInertia('not_admin').as('notAdmin')
     router.post('/logout', [LoginUsersController, 'logout']).as('logout')
-
-  }).middleware(middleware.auth())
+  })
+  .middleware(middleware.auth())
 router
   .group(() => {
     //User
-   
 
-   
     // router.post('/logout', [LoginUsersController, 'logout']).as('logout')
-    router.get('/dashboard', [DashboardController,'index']).as('dashboard')
+    router.get('/dashboard', [DashboardController, 'index']).as('dashboard')
     router.get('schools/search', [SchoolsController, 'search']).as('schools.search')
     router.get('users/search', [UsersController, 'search']).as('users.search')
     router.resource('schools', SchoolsController).as('schools').except(['edit', 'show'])
-    router
-      .put('users/:id/password', [UsersController, 'changePassword'])
-      .as('users.changePassword')
+    router.put('users/:id/password', [UsersController, 'changePassword']).as('users.changePassword')
     router.resource('users', UsersController).as('users')
     router.resource('roles', RolesController).as('roles')
     // router.on('/dashboard').renderInertia('admin/dashboard', { version: 6 }).as('dashboard')

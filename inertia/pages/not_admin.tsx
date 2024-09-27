@@ -1,8 +1,7 @@
-
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Link } from "@inertiajs/react"
-import { AlertTriangle } from "lucide-react"
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Link } from '@inertiajs/react'
+import { AlertTriangle } from 'lucide-react'
 
 export default function NotAdminPage() {
   return (

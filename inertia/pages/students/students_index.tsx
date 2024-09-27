@@ -22,7 +22,6 @@ import { debounce } from 'lodash'
 import EditStudentModal from '@/components/modals/edit_student_modal'
 
 export default function StudentIndex(props: InferPageProps<StudentsController, 'index'>) {
-
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false)
@@ -31,12 +30,12 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
   const student = props.students.data as Student[]
   const classes = props.classes as Class[]
 
-  const openEditingModal = (student: Student) => {
-    setEditingUser(student)
+  const openEditingModal = (mstudent: Student) => {
+    setEditingUser(mstudent)
     setIsEditModalOpen(true)
   }
-  const openPasswordModal = (student: Student) => {
-    setEditingUser(student)
+  const openPasswordModal = (mstudent: Student) => {
+    setEditingUser(mstudent)
     setIsPasswordModalOpen(true)
   }
 
@@ -109,23 +108,25 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
               </TableRow>
             </TableHeader>
             <TableBody>
-              {student.map((student) => (
-                <TableRow key={student.id}>
-                  <TableCell>{student.id}</TableCell>
-                  <TableCell>{student.firstName}</TableCell>
-                  <TableCell>{student.lastName}</TableCell>
+              {student.map((mstudent) => (
+                <TableRow key={mstudent.id}>
+                  <TableCell>{mstudent.id}</TableCell>
+                  <TableCell>{mstudent.firstName}</TableCell>
+                  <TableCell>{mstudent.lastName}</TableCell>
                   {/* <TableCell>{student.studentId}</TableCell> */}
-                  <TableCell>{student.primaryContact}</TableCell>
+                  <TableCell>{mstudent.primaryContact}</TableCell>
                   {/* <TableCell>{student.dateOfBirth}</TableCell> */}
-                  <TableCell>{student.school.name}</TableCell>
-                  <TableCell>{student.class.name}</TableCell>
+                  <TableCell>{mstudent.school.name}</TableCell>
+                  <TableCell>{mstudent.class.name}</TableCell>
                   <TableCell>
-                  <Button className={student.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}>
-                  {student.status}
-                </Button>
+                    <Button
+                      className={mstudent.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}
+                    >
+                      {mstudent.status}
+                    </Button>
                   </TableCell>
-                  <TableCell className='flex'>
-                    <Button className="mr-4 " onClick={() => openEditingModal(student)}>
+                  <TableCell className="flex">
+                    <Button className="mr-4 " onClick={() => openEditingModal(mstudent)}>
                       Edit
                     </Button>
                   </TableCell>
@@ -133,7 +134,10 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
               ))}
             </TableBody>
           </Table>
-          <PaginationComponent paginationData={props.students.meta} baseRoute="myschools/students" />
+          <PaginationComponent
+            paginationData={props.students.meta}
+            baseRoute="myschools/students"
+          />
           {/* <CreateStudentModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
@@ -150,7 +154,6 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
               }}
             />
           )}
-        
         </div>
       </SchoolLayout>
     </>

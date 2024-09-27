@@ -47,13 +47,13 @@ export default function EditUserModal({ isOpen, onClose, user }: EditUserModalPr
         <DialogHeader>
           <DialogTitle>
             Edit User:
-            <span className='ml-3'>{user.fullName}</span>
+            <span className="ml-3">{user.fullName}</span>
           </DialogTitle>
           {/* <DialogDescription></DialogDescription> */}
         </DialogHeader>
         <p>
-          <span className='font-bold'>Email:</span>
-          <span className='ml-1'>{user.email}</span>
+          <span className="font-bold">Email:</span>
+          <span className="ml-1">{user.email}</span>
         </p>
         {/* <p>
           <span>Email</span>
@@ -63,7 +63,9 @@ export default function EditUserModal({ isOpen, onClose, user }: EditUserModalPr
         <form onSubmit={changeName}>
           <div className="grid items-center w-full gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name" className='font-bold'>Name:</Label>
+              <Label htmlFor="name" className="font-bold">
+                Name:
+              </Label>
               <Input
                 id="name"
                 value={data.fullName}
@@ -74,7 +76,9 @@ export default function EditUserModal({ isOpen, onClose, user }: EditUserModalPr
               )}
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="phone" className='font-bold'>Phone:</Label>
+              <Label htmlFor="phone" className="font-bold">
+                Phone:
+              </Label>
               <Input
                 id="phone"
                 value={data.phone}

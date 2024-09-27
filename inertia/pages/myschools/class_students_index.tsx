@@ -1,21 +1,30 @@
-import StudentController from "#controllers/students_controller"
-import Class from "#models/class"
-import Student from "#models/student"
-import EditStudentModal from "@/components/modals/edit_student_modal"
-import PaginationComponent from "@/components/pagination_component"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import SchoolLayout from "@/layouts/school_layout"
-import { InferPageProps } from "@adonisjs/inertia/types"
-import { Head, useForm } from "@inertiajs/react"
+import StudentController from '#controllers/students_controller'
+import Class from '#models/class'
+import Student from '#models/student'
+import EditStudentModal from '@/components/modals/edit_student_modal'
+import PaginationComponent from '@/components/pagination_component'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import SchoolLayout from '@/layouts/school_layout'
+import { InferPageProps } from '@adonisjs/inertia/types'
+import { Head, useForm } from '@inertiajs/react'
 import { debounce } from 'lodash'
 import { useEffect, useState } from 'react'
 
-export default function ClassStudentIndex(props: InferPageProps<StudentController, 'classStudents'>) {
-  const classStudents = props.students.data as Student[];
-  const sclass = props.class as Class;
-  const classes = props.classes as Class[];
+export default function ClassStudentIndex(
+  props: InferPageProps<StudentController, 'classStudents'>
+) {
+  const classStudents = props.students.data as Student[]
+  const sclass = props.class as Class
+  const classes = props.classes as Class[]
   const [editingStudent, setEditingStudent] = useState<Student | null>(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
@@ -82,10 +91,12 @@ export default function ClassStudentIndex(props: InferPageProps<StudentControlle
                   <TableCell>{student.class.name}</TableCell>
                   <TableCell>{student.primaryContact}</TableCell>
                   <TableCell>
-                  <Button className={student.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}>
-                  {student.status}
-                </Button>
-                    </TableCell>
+                    <Button
+                      className={student.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}
+                    >
+                      {student.status}
+                    </Button>
+                  </TableCell>
                   <TableCell>
                     <Button onClick={() => openEditingModal(student)}>Edit</Button>
                   </TableCell>
@@ -93,7 +104,10 @@ export default function ClassStudentIndex(props: InferPageProps<StudentControlle
               ))}
             </TableBody>
           </Table>
-          <PaginationComponent paginationData={props.students.meta} baseRoute={`/myschools/classes/${sclass.id}/students`} />
+          <PaginationComponent
+            paginationData={props.students.meta}
+            baseRoute={`/myschools/classes/${sclass.id}/students`}
+          />
           {editingStudent && (
             <EditStudentModal
               classes={classes}

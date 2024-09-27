@@ -168,7 +168,7 @@ export default function CreateRoleModal({ isOpen, onClose }: CreateRoleModalProp
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing} className='mt-3'>
+            <Button type="submit" disabled={processing} className="mt-3">
               Save
             </Button>
           </DialogFooter>

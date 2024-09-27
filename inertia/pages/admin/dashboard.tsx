@@ -20,11 +20,11 @@ import { Head, Link } from '@inertiajs/react'
 // }
 
 export default function Dashboard(props: InferPageProps<DashboardController, 'index'>) {
-  const schools = props.school;
-  const roles = props.roles;
-  const users = props.users;
+  const schools = props.schools
+  const roles = props.roles
+  const users = props.users
   const version = props.version
-  
+
   return (
     <>
       <Head title="Homepage" />
@@ -55,7 +55,7 @@ export default function Dashboard(props: InferPageProps<DashboardController, 'in
               </CardContent>
               <CardFooter>
                 <Button variant="outline">
-                <Link href="/users">Manage Users</Link>
+                  <Link href="/users">Manage Users</Link>
                 </Button>
               </CardFooter>
             </Card>
@@ -81,7 +81,7 @@ export default function Dashboard(props: InferPageProps<DashboardController, 'in
               </CardContent>
               <CardFooter>
                 <Button variant="outline">
-                <Link href="/roles">Manage Roles</Link>
+                  <Link href="/roles">Manage Roles</Link>
                 </Button>
               </CardFooter>
             </Card>

@@ -2,40 +2,45 @@ import Class from '#models/class'
 import Role from '#models/role'
 import { Button } from '@/components/ui/button'
 import {
-    Dialog,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select'
 import { convertToCapitalizedWords } from '@/lib/utils'
 import { useForm } from '@inertiajs/react'
 import { FormEvent } from 'react'
 
 interface EditClassModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  classs: Class;
-  teachers: Role[];
+  isOpen: boolean
+  onClose: () => void
+  classs: Class
+  teachers: Role[]
 }
 
-export default function EditClassModal({ isOpen, onClose, classs: classData, teachers }: EditClassModalProps) {
+export default function EditClassModal({
+  isOpen,
+  onClose,
+  classs: classData,
+  teachers,
+}: EditClassModalProps) {
   const { data, setData, put, processing, errors, reset } = useForm({
     name: classData.name,
     teacherId: classData.teacherId,
   })
 
   const handleTeacherChange = (value: string) => {
-    setData('teacherId', parseInt(value))
+    setData('teacherId', Number.parseInt(value))
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -88,12 +93,14 @@ export default function EditClassModal({ isOpen, onClose, classs: classData, tea
                 </SelectContent>
               </Select>
               {errors.teacherId && (
-                <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.teacherId)}</p>
+                <p className="text-sm text-red-500">
+                  {convertToCapitalizedWords(errors.teacherId)}
+                </p>
               )}
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing} className='mt-3'>
+            <Button type="submit" disabled={processing} className="mt-3">
               Save Changes
             </Button>
           </DialogFooter>

@@ -1,25 +1,25 @@
-import Class from "#models/class";
-import Student from "#models/student";
-import { Button } from '@/components/ui/button';
+import Class from '#models/class'
+import Student from '#models/student'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { convertToCapitalizedWords } from '@/lib/utils';
-import { useForm } from "@inertiajs/react";
-import { FormEvent } from 'react';
-import { Label } from '../ui/label';
+} from '@/components/ui/select'
+import { convertToCapitalizedWords } from '@/lib/utils'
+import { useForm } from '@inertiajs/react'
+import { FormEvent } from 'react'
+import { Label } from '../ui/label'
 
 interface EditStudentModalProps {
   isOpen: boolean
@@ -38,7 +38,7 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
   }
 
   const handleClassChange = (value: string) => {
-    setData('classId', parseInt(value))
+    setData('classId', Number.parseInt(value))
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -64,51 +64,69 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
           <form onSubmit={handleSubmit}>
             <div className="grid items-center w-full gap-4 ">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="firstName" className="font-bold">First Name</Label>
+                <Label htmlFor="firstName" className="font-bold">
+                  First Name
+                </Label>
                 <Input
                   id="firstName"
                   value={data.firstName}
                   onChange={(e) => setData('firstName', e.target.value)}
                 />
                 {errors.firstName && (
-                  <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.firstName)}</p>
+                  <p className="text-sm text-red-500">
+                    {convertToCapitalizedWords(errors.firstName)}
+                  </p>
                 )}
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="lastName" className="font-bold">Last Name</Label>
+                <Label htmlFor="lastName" className="font-bold">
+                  Last Name
+                </Label>
                 <Input
                   id="lastName"
                   value={data.lastName}
                   onChange={(e) => setData('lastName', e.target.value)}
                 />
                 {errors.lastName && (
-                  <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.lastName)}</p>
+                  <p className="text-sm text-red-500">
+                    {convertToCapitalizedWords(errors.lastName)}
+                  </p>
                 )}
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="primaryContact" className="font-bold">Primary Contact</Label>
+                <Label htmlFor="primaryContact" className="font-bold">
+                  Primary Contact
+                </Label>
                 <Input
                   id="primaryContact"
                   value={data.primaryContact}
                   onChange={(e) => setData('primaryContact', e.target.value)}
                 />
                 {errors.primaryContact && (
-                  <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.primaryContact)}</p>
+                  <p className="text-sm text-red-500">
+                    {convertToCapitalizedWords(errors.primaryContact)}
+                  </p>
                 )}
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="schoolId" className="font-bold">School</Label>
+                <Label htmlFor="schoolId" className="font-bold">
+                  School
+                </Label>
                 <Input
                   id="schoolId"
                   value={data.schoolId}
-                  onChange={(e) => setData('schoolId', parseInt(e.target.value))}
+                  onChange={(e) => setData('schoolId', Number.parseInt(e.target.value))}
                 />
                 {errors.schoolId && (
-                  <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.schoolId)}</p>
+                  <p className="text-sm text-red-500">
+                    {convertToCapitalizedWords(errors.schoolId)}
+                  </p>
                 )}
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="classId" className="font-bold">Class</Label>
+                <Label htmlFor="classId" className="font-bold">
+                  Class
+                </Label>
                 <Select onValueChange={handleClassChange} defaultValue={data.classId.toString()}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select class" />
@@ -122,11 +140,15 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
                   </SelectContent>
                 </Select>
                 {errors.classId && (
-                  <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.classId)}</p>
+                  <p className="text-sm text-red-500">
+                    {convertToCapitalizedWords(errors.classId)}
+                  </p>
                 )}
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="status" className="font-bold">Status</Label>
+                <Label htmlFor="status" className="font-bold">
+                  Status
+                </Label>
                 <Select onValueChange={handleSelectChange} defaultValue={data.status}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select status" />
@@ -153,4 +175,4 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
   )
 }
 
-export default EditStudentModal;
+export default EditStudentModal

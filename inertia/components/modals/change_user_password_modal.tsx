@@ -49,11 +49,11 @@ export default function ChangeUserPasswordModal({
         <DialogHeader>
           <DialogTitle>
             Edit User:
-            <span className='ml-3'>{user.fullName}</span>
+            <span className="ml-3">{user.fullName}</span>
           </DialogTitle>
         </DialogHeader>
         <p>
-          <span className='font-bold mr-2'>Email:</span>
+          <span className="font-bold mr-2">Email:</span>
           {user.email}
         </p>
         <p>{user.isSystemAdmin ? <VerifiedIcon /> : <BadgeXIcon />}</p>
@@ -82,7 +82,7 @@ export default function ChangeUserPasswordModal({
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing} className='mt-3'>
+            <Button type="submit" disabled={processing} className="mt-3">
               Save
             </Button>
           </DialogFooter>

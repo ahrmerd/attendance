@@ -26,10 +26,11 @@ export default class LoginUsersController {
         return ctx.response.redirect().toRoute('dashboard')
       }
       return ctx.response.redirect().toRoute('myschools')
-
     } catch (error) {
       if (error instanceof authErrors.E_INVALID_CREDENTIALS) {
-        session.flash('errors', { email: 'invalid credentials. Please check your credentials and try again' })
+        session.flash('errors', {
+          email: 'invalid credentials. Please check your credentials and try again',
+        })
         return ctx.response.redirect().back()
         // console.log();
         // throw new vineErrors.E_VALIDATION_ERROR([error.message])

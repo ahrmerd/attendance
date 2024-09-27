@@ -1,16 +1,23 @@
 import { useState, useEffect } from 'react'
-import { InferPageProps } from "@adonisjs/inertia/types"
-import AttendancesController from "#controllers/attendances_controller"
-import { Head, useForm } from "@inertiajs/react"
-import SchoolLayout from "@/layouts/school_layout"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import Attendance from "#models/attendance"
-import Student from "#models/student"
-import Class from "#models/class"
-import { DateTime } from "luxon"
-import PaginationComponent from "@/components/pagination_component"
+import { InferPageProps } from '@adonisjs/inertia/types'
+import AttendancesController from '#controllers/attendances_controller'
+import { Head, useForm } from '@inertiajs/react'
+import SchoolLayout from '@/layouts/school_layout'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import Attendance from '#models/attendance'
+import Student from '#models/student'
+import Class from '#models/class'
+import { DateTime } from 'luxon'
+import PaginationComponent from '@/components/pagination_component'
 import { debounce } from 'lodash'
 
 type AttendanceWithRelations = Attendance & {
@@ -18,14 +25,16 @@ type AttendanceWithRelations = Attendance & {
   class: Class
 }
 
-export default function AttendanceIndex({ attendances, classId }: InferPageProps<AttendancesController, 'index'>) {
+export default function AttendanceIndex({
+  attendances,
+  classId,
+}: InferPageProps<AttendancesController, 'index'>) {
   const attendanceData = attendances.data as AttendanceWithRelations[]
-
 
   const { data, setData, get } = useForm({
     search: '',
     page: attendances.meta.currentPage,
-  });
+  })
 
   const debouncedGet = debounce(() => {
     get(`/myschools/classes/${classId}/attendances`, {
@@ -76,14 +85,24 @@ export default function AttendanceIndex({ attendances, classId }: InferPageProps
                   <TableCell>{attendance.id}</TableCell>
                   <TableCell>{`${attendance.student.firstName} ${attendance.student.lastName}`}</TableCell>
                   <TableCell>{attendance.class.name}</TableCell>
-                  <TableCell>{DateTime.fromISO(attendance.clockIn as unknown as string).toLocaleString(DateTime.DATETIME_MED)}</TableCell>
-                  <TableCell>{attendance.clockOut ? DateTime.fromISO(attendance.clockOut as unknown as string).toLocaleString(DateTime.DATETIME_MED) : 'Not clocked out'}</TableCell>
+                  <TableCell>
+                    {DateTime.fromISO(attendance.clockIn as unknown as string).toLocaleString(
+                      DateTime.DATETIME_MED
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {attendance.clockOut
+                      ? DateTime.fromISO(attendance.clockOut as unknown as string).toLocaleString(
+                          DateTime.DATETIME_MED
+                        )
+                      : 'Not clocked out'}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-          <PaginationComponent 
-            paginationData={attendances.meta} 
+          <PaginationComponent
+            paginationData={attendances.meta}
             baseRoute={`/myschools/classes/${classId}/attendances`}
           />
         </div>

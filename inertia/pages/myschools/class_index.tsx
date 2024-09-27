@@ -1,20 +1,26 @@
-import ClassesController from "#controllers/classes_controller"
-import Class from "#models/class"
-import Role from "#models/role"
-import School from "#models/school"
-import User from "#models/user"
-import CreateClassModal from "@/components/modals/create_class_modal"
-import EditClassModal from "@/components/modals/edit_class_modal"
+import ClassesController from '#controllers/classes_controller'
+import Class from '#models/class'
+import Role from '#models/role'
+import School from '#models/school'
+import User from '#models/user'
+import CreateClassModal from '@/components/modals/create_class_modal'
+import EditClassModal from '@/components/modals/edit_class_modal'
 import PaginationComponent from '@/components/pagination_component'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import SchoolLayout from "@/layouts/school_layout"
-import { InferPageProps } from "@adonisjs/inertia/types"
-import { Head, Link, useForm } from "@inertiajs/react"
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import SchoolLayout from '@/layouts/school_layout'
+import { InferPageProps } from '@adonisjs/inertia/types'
+import { Head, Link, useForm } from '@inertiajs/react'
 import { debounce } from 'lodash'
-import { useEffect, useState } from "react"
-
+import { useEffect, useState } from 'react'
 
 type ClassWithRelations = Class & {
   school: School
@@ -60,7 +66,7 @@ export default function ClassIndex(props: InferPageProps<ClassesController, 'ind
               Add New Class
             </Button>
           </div>
-            <Input
+          <Input
             type="text"
             placeholder="Search Class..."
             value={data.search}
@@ -85,8 +91,15 @@ export default function ClassIndex(props: InferPageProps<ClassesController, 'ind
                   <TableCell>{classItem.school?.name || 'N/A'}</TableCell>
                   <TableCell>{classItem.teacher?.fullName || 'N/A'}</TableCell>
                   <TableCell>
-                  <Button  variant="outline" size="sm" className="mr-5" onClick={() => openEditingModal(classItem)}>Edit</Button>
-                    
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="mr-5"
+                      onClick={() => openEditingModal(classItem)}
+                    >
+                      Edit
+                    </Button>
+
                     <Button variant="outline" size="sm" className="mr-5">
                       <Link href={`/myschools/classes/${classItem.id}/attendances`}>
                         View Attendance
@@ -99,7 +112,7 @@ export default function ClassIndex(props: InferPageProps<ClassesController, 'ind
                     </Button>
                   </TableCell>
                 </TableRow>
-                ))}
+              ))}
             </TableBody>
           </Table>
           <PaginationComponent paginationData={props.classes.meta} baseRoute="/myschools/classes" />
@@ -108,7 +121,7 @@ export default function ClassIndex(props: InferPageProps<ClassesController, 'ind
             teachers={props.schoolTeachers as Role[]}
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
-          // onSubmit={handleAddRole}
+            // onSubmit={handleAddRole}
           />
           {editingClass && (
             <EditClassModal

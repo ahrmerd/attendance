@@ -1,16 +1,16 @@
-import React from 'react';
-import { BarChart, LineChart, CartesianGrid, XAxis, Bar, Line, TooltipProps } from 'recharts';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'; // Adjust the import path as needed
+import React from 'react'
+import { BarChart, LineChart, CartesianGrid, XAxis, Bar, Line, TooltipProps } from 'recharts'
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart' // Adjust the import path as needed
 
 // Define the shape of our data
 interface ChartData {
-  month: string;
-  desktop: number;
+  month: string
+  desktop: number
 }
 
 // Define the props for both chart components
 interface ChartProps extends React.HTMLAttributes<HTMLDivElement> {
-  data?: ChartData[];
+  data?: ChartData[]
 }
 
 const BarchartChart: React.FC<ChartProps> = ({ data, ...props }) => {
@@ -19,22 +19,24 @@ const BarchartChart: React.FC<ChartProps> = ({ data, ...props }) => {
       <ChartContainer
         config={{
           desktop: {
-            label: "Desktop",
-            color: "hsl(var(--chart-1))",
+            label: 'Desktop',
+            color: 'hsl(var(--chart-1))',
           },
         }}
         className="min-h-[300px]"
       >
         <BarChart
           accessibilityLayer
-          data={data || [
-            { month: "January", desktop: 186 },
-            { month: "February", desktop: 305 },
-            { month: "March", desktop: 237 },
-            { month: "April", desktop: 73 },
-            { month: "May", desktop: 209 },
-            { month: "June", desktop: 214 },
-          ]}
+          data={
+            data || [
+              { month: 'January', desktop: 186 },
+              { month: 'February', desktop: 305 },
+              { month: 'March', desktop: 237 },
+              { month: 'April', desktop: 73 },
+              { month: 'May', desktop: 209 },
+              { month: 'June', desktop: 214 },
+            ]
+          }
         >
           <CartesianGrid vertical={false} />
           <XAxis
@@ -58,21 +60,23 @@ const LinechartChart: React.FC<ChartProps> = ({ data, ...props }) => {
       <ChartContainer
         config={{
           desktop: {
-            label: "Desktop",
-            color: "hsl(var(--chart-1))",
+            label: 'Desktop',
+            color: 'hsl(var(--chart-1))',
           },
         }}
       >
         <LineChart
           accessibilityLayer
-          data={data || [
-            { month: "January", desktop: 186 },
-            { month: "February", desktop: 305 },
-            { month: "March", desktop: 237 },
-            { month: "April", desktop: 73 },
-            { month: "May", desktop: 209 },
-            { month: "June", desktop: 214 },
-          ]}
+          data={
+            data || [
+              { month: 'January', desktop: 186 },
+              { month: 'February', desktop: 305 },
+              { month: 'March', desktop: 237 },
+              { month: 'April', desktop: 73 },
+              { month: 'May', desktop: 209 },
+              { month: 'June', desktop: 214 },
+            ]
+          }
           margin={{
             left: 12,
             right: 12,
@@ -87,11 +91,17 @@ const LinechartChart: React.FC<ChartProps> = ({ data, ...props }) => {
             tickFormatter={(value: string) => value.slice(0, 3)}
           />
           <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-          <Line dataKey="desktop" type="natural" stroke="var(--color-desktop)" strokeWidth={2} dot={false} />
+          <Line
+            dataKey="desktop"
+            type="natural"
+            stroke="var(--color-desktop)"
+            strokeWidth={2}
+            dot={false}
+          />
         </LineChart>
       </ChartContainer>
     </div>
   )
 }
 
-export { BarchartChart, LinechartChart };
+export { BarchartChart, LinechartChart }

@@ -91,7 +91,7 @@ export default function CreateUserModal({ isOpen, onClose }: CreateUserModalProp
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing} className='mt-2'>
+            <Button type="submit" disabled={processing} className="mt-2">
               Save
             </Button>
           </DialogFooter>
