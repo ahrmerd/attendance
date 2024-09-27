@@ -28,13 +28,19 @@ export default class DownloadsController {
       // let classQuery = Class.query().preload('school').preload('teacher')
       // const classes = await classQuery.whereIn('id', schoolsId).exec()
       const classesXteachersIds = classes.map((sclass) => {
-        return {classId: sclass.id, teacher: sclass.teacherId}
+        return { classId: sclass.id, teacher: sclass.teacherId }
       })
-      const students = await Student.query().whereIn('class_id', classesXteachersIds.map(e=>e.classId))
+      const students = await Student.query().whereIn(
+        'class_id',
+        classesXteachersIds.map((e) => e.classId)
+      )
       const studentsIds = students.map((student) => student.id)
-      const teachers = await User.query().whereIn('id', classesXteachersIds.map(e=>e.teacher))
+      const teachers = await User.query().whereIn(
+        'id',
+        classesXteachersIds.map((e) => e.teacher)
+      )
       //console.log();
-      
+
       const attendances = await Attendance.query().whereIn('student_id', studentsIds)
       return {
         teachers,

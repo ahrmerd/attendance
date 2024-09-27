@@ -6,7 +6,7 @@ export default class TeachersController {
     const roles = await auth.user?.related('role').query().exec()
     const page = request.input('page', 1)
     const search = request.input('search')
-    if (!roles || roles.length == 0) {
+    if (!roles || roles.length === 0) {
       return response.redirect().toRoute('notSchool')
     }
     const schoolsId = roles.map((role) => role.schoolId)

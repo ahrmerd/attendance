@@ -15,7 +15,7 @@ class SMSService {
   async sendSMSFromBulkSMSNigeriaV1(to: string, body: string, from: string) {
     const apiUrl = 'https://www.bulksmsnigeria.com/api/v1/sms/create'
     const apiToken = env.get('BULKSMS_API_TOKEN')
-    
+
     try {
       const response = await axios.post(apiUrl, null, {
         params: {
@@ -38,18 +38,24 @@ class SMSService {
     const apiUrl = 'https://www.bulksmsnigeria.com/api/v2/sms/create'
     const apiToken = env.get('BULKSMS_API_TOKEN')
     try {
-      const response = await axios.post(apiUrl, {
+      const response = await axios.post(
+        apiUrl,
+        {
           api_token: apiToken,
           from,
           to,
           body,
           customer_reference: ref,
-          callback_url: `${env.get('HOST')}/callback/sms`
-           // Using the default option for DND management,
-      }, {headers: {
-        Accept: 'application/json',
-        "Content-Type": "application/json"
-      }})
+          callback_url: `${env.get('HOST')}/callback/sms`,
+          // Using the default option for DND management,
+        },
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
 
       return response.data
     } catch (error) {
@@ -60,7 +66,7 @@ class SMSService {
 
   async sendSMS(to: string, body: string, from: string, ref: string) {
     try {
-      const response = await this.sendSMSFromBulkSMSNigeriaV2(to,body, from, ref)
+      const response = await this.sendSMSFromBulkSMSNigeriaV2(to, body, from, ref)
 
       return response.data
     } catch (error) {
@@ -76,7 +82,12 @@ class SMSService {
     }
     // return true;
 
-    await this.sendSMS(student.primaryContact, message, student.school.name.substring(0, 10), `${student.firstName} - ${student.id}`)
+    await this.sendSMS(
+      student.primaryContact,
+      message,
+      student.school.name.substring(0, 10),
+      `${student.firstName} - ${student.id}`
+    )
   }
 }
 

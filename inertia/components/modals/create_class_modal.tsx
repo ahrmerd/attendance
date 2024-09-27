@@ -41,7 +41,9 @@ export default function CreateClassModal({
   })
   console.log(teachers)
 
-  const schoolTeachers = teachers.filter((teacher) => teacher.schoolId == parseInt(data.schoolId))
+  const schoolTeachers = teachers.filter(
+    (teacher) => teacher.schoolId === Number.parseInt(data.schoolId)
+  )
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -96,7 +98,7 @@ export default function CreateClassModal({
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="teacherId">Teacher</Label>
               <Select
-                disabled={schoolTeachers.length == 0}
+                disabled={schoolTeachers.length === 0}
                 value={data.teacherId}
                 onValueChange={(value) => setData('teacherId', value)}
               >

@@ -31,10 +31,10 @@ export default class Student extends BaseModel {
   declare status: 'active' | 'inactive'
 
   @column({
-      serialize: (value: Buffer) => {
-        return value.toString('base64')
-      },
-    })
+    serialize: (value: Buffer) => {
+      return value.toString('base64')
+    },
+  })
   declare finger1: Buffer
 
   @column({

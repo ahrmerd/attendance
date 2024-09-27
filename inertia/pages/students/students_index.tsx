@@ -29,12 +29,12 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
   console.log(props.students)
   const student = props.students.data as Student[]
 
-  const openEditingModal = (student: Student) => {
-    setEditingUser(student)
+  const openEditingModal = (mstudent: Student) => {
+    setEditingUser(mstudent)
     setIsEditModalOpen(true)
   }
-  const openPasswordModal = (student: Student) => {
-    setEditingUser(student)
+  const openPasswordModal = (mstudent: Student) => {
+    setEditingUser(mstudent)
     setIsPasswordModalOpen(true)
   }
 
@@ -107,22 +107,22 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
               </TableRow>
             </TableHeader>
             <TableBody>
-              {student.map((student) => (
-                <TableRow key={student.id}>
-                  <TableCell>{student.id}</TableCell>
-                  <TableCell>{student.firstName}</TableCell>
-                  <TableCell>{student.lastName}</TableCell>
+              {student.map((mstudent) => (
+                <TableRow key={mstudent.id}>
+                  <TableCell>{mstudent.id}</TableCell>
+                  <TableCell>{mstudent.firstName}</TableCell>
+                  <TableCell>{mstudent.lastName}</TableCell>
                   {/* <TableCell>{student.studentId}</TableCell> */}
-                  <TableCell>{student.primaryContact}</TableCell>
+                  <TableCell>{mstudent.primaryContact}</TableCell>
                   {/* <TableCell>{student.dateOfBirth}</TableCell> */}
-                  <TableCell>{student.school.name}</TableCell>
-                  <TableCell>{student.class.name}</TableCell>
-                  <TableCell>{student.status}</TableCell>
+                  <TableCell>{mstudent.school.name}</TableCell>
+                  <TableCell>{mstudent.class.name}</TableCell>
+                  <TableCell>{mstudent.status}</TableCell>
                   <TableCell className="flex">
-                    <Button className="mr-4 " onClick={() => openEditingModal(student)}>
+                    <Button className="mr-4 " onClick={() => openEditingModal(mstudent)}>
                       Edit
                     </Button>
-                    <Button onClick={() => openPasswordModal(student)}>Change Password</Button>
+                    <Button onClick={() => openPasswordModal(mstudent)}>Change Password</Button>
                   </TableCell>
                 </TableRow>
               ))}

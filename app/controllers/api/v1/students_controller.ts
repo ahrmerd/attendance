@@ -33,7 +33,7 @@ export default class StudentsController {
     //add fingerprint validation
     const payload = await request.validateUsing(storeStudentValidator)
     const classs = await Class.find(payload.classId)
-    if (classs != null) {
+    if (classs !== null) {
       const student = await Student.create({
         classId: payload.classId,
         primaryContact: payload.primaryContact,
@@ -46,7 +46,6 @@ export default class StudentsController {
       return student
     }
     return response.status(412).send({ error: 'could not add students' })
-
   }
   async update({ request }: HttpContext) {
     //will not yet implemented

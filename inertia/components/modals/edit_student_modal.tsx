@@ -106,7 +106,7 @@ const EditStudentModal = ({ isOpen, onClose, student }: EditStudentModalProps) =
                   id="schoolId"
                   type="schoolId"
                   value={data.schoolId}
-                  onChange={(e) => setData('schoolId', parseInt(e.target.value))}
+                  onChange={(e) => setData('schoolId', Number.parseInt(e.target.value))}
                 />
                 {errors.schoolId && (
                   <p className="text-sm text-red-500">
@@ -120,7 +120,7 @@ const EditStudentModal = ({ isOpen, onClose, student }: EditStudentModalProps) =
                   id="classId"
                   type="classId"
                   value={data.classId}
-                  onChange={(e) => setData('classId', parseInt(e.target.value))}
+                  onChange={(e) => setData('classId', Number.parseInt(e.target.value))}
                 />
                 {errors.classId && (
                   <p className="text-sm text-red-500">
