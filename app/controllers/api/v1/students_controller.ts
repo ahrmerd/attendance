@@ -28,21 +28,24 @@ export default class StudentsController {
       // const teacherSchoolsClass = await Class.query().whereIn('school_id', adminschoolsId)
     }
   }
-  async store({ request }: HttpContext) {
+  async store({ request, response }: HttpContext) {
     //should be nullable
     //add fingerprint validation
     const payload = await request.validateUsing(storeStudentValidator)
     const classs = await Class.find(payload.classId)
-    const student = await Student.create({
-      classId: payload.classId,
-      primaryContact: payload.primaryContact,
-      firstName: payload.firstName,
-      lastName: payload.firstName,
-      finger1: Buffer.from(payload.finger1),
-      finger2: Buffer.from(payload.finger2),
-      schoolId: classs?.schoolId,
-    })
-    return student
+    if (classs !== null) {
+      const student = await Student.create({
+        classId: payload.classId,
+        primaryContact: payload.primaryContact,
+        firstName: payload.firstName,
+        lastName: payload.firstName,
+        finger1: Buffer.from(payload.finger1, 'base64'),
+        finger2: Buffer.from(payload.finger2, 'base64'),
+        schoolId: classs?.schoolId,
+      })
+      return student
+    }
+    return response.status(412).send({ error: 'could not add students' })
   }
   async update({ request }: HttpContext) {
     //will not yet implemented

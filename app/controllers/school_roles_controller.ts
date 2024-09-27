@@ -8,7 +8,6 @@ export default class RolesController {
   async index({ inertia, request, auth }: HttpContext) {
     const authUserRoles: Role[] = await auth.user?.related('role').query().exec()
     const schoolsId = authUserRoles?.map((role) => role.schoolId) ?? []
-    const usersId = authUserRoles?.map((role) => role.userId) ?? []
     // const schoolTeachers = (await Role.query()
     // .whereIn('school_id', schoolsId)
     // .preload('user').exec())

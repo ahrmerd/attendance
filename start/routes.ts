@@ -21,6 +21,7 @@ const StudentsApiController = () => import('#controllers/api/v1/students_control
 const DashboardController = () => import('#controllers/dashboard_controller')
 const ClassesApiController = () => import('#controllers/api/v1/classes_controller')
 const AttendancesApiController = () => import('#controllers/api/v1/attendances_controller')
+const DownloadsApiController = () => import('#controllers/api/v1/downloads_controller')
 const RolesController = () => import('#controllers/roles_controller')
 const UsersController = () => import('#controllers/users_controller')
 const SchoolsController = () => import('#controllers/schools_controller')
@@ -94,6 +95,7 @@ router
         router.get('/api/v1/students', [StudentsApiController, 'index']).as('students.index')
         router.post('/api/v1/students', [StudentsApiController, 'store']).as('students.store')
         router.get('/api/v1/classes', [ClassesApiController, 'index']).as('classes.index')
+        router.get('/api/v1/download-data', [DownloadsApiController, 'index']).as('download-data')
         router
           .get('/api/v1/attendances', [AttendancesApiController, 'index'])
           .as('attendances.index')

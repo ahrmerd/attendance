@@ -21,6 +21,7 @@ import { Link, usePage } from '@inertiajs/react'
 import { LayoutDashboardIcon, MenuIcon } from 'lucide-react'
 import { ReactNode } from 'react'
 
+
 interface SchoolLayoutProps {
   children: ReactNode
 }
@@ -30,6 +31,7 @@ export default function SchoolLayout({ children }: SchoolLayoutProps) {
   return (
     <div className="flex flex-col w-full min-h-screen bg-muted/40 dark:bg-gray-950">
       <header className="flex items-center justify-between h-16 px-6 border-b dark:border-gray-800 dark:bg-gray-900">
+
         <div className="flex items-center gap-4">
           <Button size="icon" variant="ghost" className="sm:hidden">
             <LayoutDashboardIcon />

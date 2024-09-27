@@ -118,6 +118,7 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
                   {/* <TableCell>{student.dateOfBirth}</TableCell> */}
                   <TableCell>{mstudent.school.name}</TableCell>
                   <TableCell>{mstudent.class.name}</TableCell>
+
                   <TableCell>
                     <Button
                       className={mstudent.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}
@@ -125,6 +126,7 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
                       {mstudent.status}
                     </Button>
                   </TableCell>
+
                   <TableCell className="flex">
                     <Button className="mr-4 " onClick={() => openEditingModal(mstudent)}>
                       Edit
@@ -154,6 +156,7 @@ export default function StudentIndex(props: InferPageProps<StudentsController, '
               }}
             />
           )}
+
         </div>
       </SchoolLayout>
     </>

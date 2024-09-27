@@ -21,6 +21,7 @@ import { useForm } from '@inertiajs/react'
 import { FormEvent } from 'react'
 import { Label } from '../ui/label'
 
+
 interface EditStudentModalProps {
   isOpen: boolean
   student: Student
@@ -29,6 +30,7 @@ interface EditStudentModalProps {
 }
 
 const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModalProps) => {
+
   const { data, setData, put, processing, errors, reset } = useForm({
     ...student,
   })
@@ -52,7 +54,6 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
       },
     })
   }
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -67,6 +68,7 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
                 <Label htmlFor="firstName" className="font-bold">
                   First Name
                 </Label>
+
                 <Input
                   id="firstName"
                   value={data.firstName}
@@ -84,6 +86,7 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
                 </Label>
                 <Input
                   id="lastName"
+
                   value={data.lastName}
                   onChange={(e) => setData('lastName', e.target.value)}
                 />
@@ -99,6 +102,7 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
                 </Label>
                 <Input
                   id="primaryContact"
+
                   value={data.primaryContact}
                   onChange={(e) => setData('primaryContact', e.target.value)}
                 />
@@ -114,6 +118,7 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
                 </Label>
                 <Input
                   id="schoolId"
+
                   value={data.schoolId}
                   onChange={(e) => setData('schoolId', Number.parseInt(e.target.value))}
                 />
@@ -139,6 +144,7 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
                     ))}
                   </SelectContent>
                 </Select>
+
                 {errors.classId && (
                   <p className="text-sm text-red-500">
                     {convertToCapitalizedWords(errors.classId)}
@@ -151,6 +157,7 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
                 </Label>
                 <Select onValueChange={handleSelectChange} defaultValue={data.status}>
                   <SelectTrigger className="w-full">
+
                     <SelectValue placeholder="Select status" />
                   </SelectTrigger>
                   <SelectContent>
@@ -160,11 +167,13 @@ const EditStudentModal = ({ isOpen, onClose, student, classes }: EditStudentModa
                 </Select>
                 {errors.status && (
                   <p className="text-sm text-red-500">{convertToCapitalizedWords(errors.status)}</p>
+
                 )}
               </div>
             </div>
             <DialogFooter>
               <Button type="submit" disabled={processing} className="mt-3">
+
                 Save
               </Button>
             </DialogFooter>

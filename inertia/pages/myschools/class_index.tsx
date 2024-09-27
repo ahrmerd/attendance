@@ -8,6 +8,7 @@ import EditClassModal from '@/components/modals/edit_class_modal'
 import PaginationComponent from '@/components/pagination_component'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+
 import {
   Table,
   TableBody,
@@ -21,6 +22,7 @@ import { InferPageProps } from '@adonisjs/inertia/types'
 import { Head, Link, useForm } from '@inertiajs/react'
 import { debounce } from 'lodash'
 import { useEffect, useState } from 'react'
+
 
 type ClassWithRelations = Class & {
   school: School
@@ -101,11 +103,13 @@ export default function ClassIndex(props: InferPageProps<ClassesController, 'ind
                     </Button>
 
                     <Button variant="outline" size="sm" className="mr-5">
+
                       <Link href={`/myschools/classes/${classItem.id}/attendances`}>
                         View Attendance
                       </Link>
                     </Button>
                     <Button variant="outline" size="sm" className="mr-5">
+
                       <Link href={`/myschools/classes/${classItem.id}/students`}>
                         View Students
                       </Link>

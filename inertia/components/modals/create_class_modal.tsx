@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+
 import {
   Select,
   SelectContent,
@@ -20,6 +21,7 @@ import {
 import { convertToCapitalizedWords } from '@/lib/utils'
 import { useForm } from '@inertiajs/react'
 import { FormEvent } from 'react'
+
 
 interface CreateClassModalProps {
   isOpen: boolean

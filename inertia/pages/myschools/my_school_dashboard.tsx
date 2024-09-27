@@ -1,3 +1,4 @@
+
 import DashboardController from '#controllers/dashboard_controller'
 import { BarchartChart, LinechartChart } from '@/components/chart_components'
 import { Button } from '@/components/ui/button'
@@ -25,6 +26,7 @@ export default function MySchoolDashboard(
         <main className="grid gap-8 p-4 sm:p-6">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             <Card>
+
               <CardHeader className="pb-3">
                 <CardTitle>Students</CardTitle>
                 <CardDescription>Total number of Students in the system.</CardDescription>
