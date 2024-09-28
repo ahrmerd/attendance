@@ -35,3 +35,9 @@ export const storeStudentValidator = vine.compile(
     }),
   })
 )
+
+export const verifyStudentValidator = vine.compile(
+  vine.object({
+    finger: vine.string(),
+  })
+)

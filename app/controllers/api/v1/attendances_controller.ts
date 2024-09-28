@@ -53,16 +53,23 @@ export default class AttendancesController {
     }
   }
 
-  async store({ request }: HttpContext) {
+  async store({ request, response }: HttpContext) {
     const payload = await request.validateUsing(
       vine.compile(
         vine.object({
           studentId: vine.number(),
+          finger: vine.string(),
         })
       )
     )
     const student = await Student.findOrFail(payload.studentId)
     //a method that does the checks to ensure that a student
+    if (
+      student.finger1.toString('base64') !== payload.finger &&
+      student.finger2.toString('base64') !== payload.finger
+    ) {
+      return response.status(412).send({ errors: [{ message: 'Invalid Finger Data' }] })
+    }
     if (student.status === 'active') {
       const attendance = await Attendance.create({
         studentId: student.id,
@@ -74,5 +81,6 @@ export default class AttendancesController {
         `Your ward ${student.firstName + ' ' + student.lastName} has just arrived the school premisis at ${attendance.clockIn}`
       )
     }
+    return response.status(412).send({ errors: [{ message: 'The Student is not Active' }] })
   }
 }

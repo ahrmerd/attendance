@@ -31,6 +31,7 @@ const SchoolRoleController = () => import('#controllers/school_roles_controller'
 router.on('/').renderInertia('home', { version: 6 }).as('home')
 // router.on('/').renderInertia('admin/dashboard', { version: 6 }).as('home-dash')
 
+//guest routes
 router
   .group(() => {
     router.get('/login', [LoginUsersController, 'create']).as('login')
@@ -41,6 +42,7 @@ router
   })
   .middleware(middleware.guest())
 
+//myschools routes
 router
   .group(() => {
     router.get('/myschools/dashboard', [DashboardController, 'schoolDashboard']).as('myschools')
@@ -60,6 +62,8 @@ router
     // router.resource('/myschools/students', StudentsController).as('students')
   })
   .middleware(middleware.schoolAuth())
+
+//only auth routes
 router
   .group(() => {
     router.on('not-school').renderInertia('not_school').as('notSchool')
@@ -67,11 +71,10 @@ router
     router.post('/logout', [LoginUsersController, 'logout']).as('logout')
   })
   .middleware(middleware.auth())
+
+//system admin routes
 router
   .group(() => {
-    //User
-
-    // router.post('/logout', [LoginUsersController, 'logout']).as('logout')
     router.get('/dashboard', [DashboardController, 'index']).as('dashboard')
     router.get('schools/search', [SchoolsController, 'search']).as('schools.search')
     router.get('users/search', [UsersController, 'search']).as('users.search')
@@ -79,8 +82,6 @@ router
     router.put('users/:id/password', [UsersController, 'changePassword']).as('users.changePassword')
     router.resource('users', UsersController).as('users')
     router.resource('roles', RolesController).as('roles')
-    // router.on('/dashboard').renderInertia('admin/dashboard', { version: 6 }).as('dashboard')
-    // router.get('/dashboard', )
   })
   .middleware(middleware.adminAuth())
 
@@ -93,6 +94,9 @@ router
     router
       .group(() => {
         router.get('/api/v1/students', [StudentsApiController, 'index']).as('students.index')
+        router
+          .post('/api/v1/students/verify', [StudentsApiController, 'verifyStudents'])
+          .as('students.verify')
         router.post('/api/v1/students', [StudentsApiController, 'store']).as('students.store')
         router.get('/api/v1/classes', [ClassesApiController, 'index']).as('classes.index')
         router.get('/api/v1/download-data', [DownloadsApiController, 'index']).as('download-data')

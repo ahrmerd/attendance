@@ -1,11 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import User from '#models/user'
-import { loginUserValidator } from '#validators/user_validator'
-import { errors as authErrors } from '@adonisjs/auth'
 import Role from '#models/role'
 import Class from '#models/class'
 import Student from '#models/student'
-import { storeStudentValidator } from '#validators/student_validator'
+import { storeStudentValidator, verifyStudentValidator } from '#validators/student_validator'
 
 export default class StudentsController {
   async index({ request, auth }: HttpContext) {
@@ -45,8 +42,23 @@ export default class StudentsController {
       })
       return student
     }
-    return response.status(412).send({ error: 'could not add students' })
+    return response
+      .status(412)
+      .send({ errors: [{ message: 'could not add students. The Class could not be found' }] })
   }
+
+  async verifyStudents({ request, response }: HttpContext) {
+    //should be nullable
+    //add fingerprint validation
+    const payload = await request.validateUsing(verifyStudentValidator)
+    const buf = Buffer.from(payload.finger, 'base64')
+    const students = await Student.query().where('finger1', buf).orWhere('finger2', buf).exec()
+    if (students.length > 0) {
+      return students[0]
+    }
+    return response.status(412).send({ errors: [{ message: 'No Student Found' }] })
+  }
+
   async update({ request }: HttpContext) {
     //will not yet implemented
   }
