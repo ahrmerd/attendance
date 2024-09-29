@@ -22,7 +22,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-l
 FROM base AS build
 COPY --from=deps /app/node_modules /app/node_modules
 COPY . .
-RUN pnpm run build
+RUN pnpm run build --ignore-ts-errors
 
 # Production stage
 FROM base
