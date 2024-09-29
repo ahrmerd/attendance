@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Table,
   TableBody,
@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/table'
 import { Button, buttonVariants } from '@/components/ui/button'
 import AdminLayout from '@/layouts/admin_layout'
-import { Head, Link, router, useForm } from '@inertiajs/react'
+import { Head, Link, useForm } from '@inertiajs/react'
 // import CreateRoleModal from '@/components/modals/create_roles_modal'
 import { InferPageProps } from '@adonisjs/inertia/types'
 import type RolesController from '#controllers/roles_controller'

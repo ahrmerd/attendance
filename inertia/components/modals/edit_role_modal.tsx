@@ -1,7 +1,13 @@
-import React, { FormEvent, useState } from 'react'
-import { useForm } from '@inertiajs/react'
-import axios from 'axios'
+import Role from '#models/role'
 import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -9,17 +15,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from '@/components/ui/dialog'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 import { convertToCapitalizedWords } from '@/lib/utils'
-import Role from '#models/role'
+import { useForm } from '@inertiajs/react'
+import { FormEvent } from 'react'
 
 interface EditRoleModalProps {
   isOpen: boolean
@@ -48,41 +46,37 @@ export default function EditRoleModal({ isOpen, onClose, role }: EditRoleModalPr
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add New Role</DialogTitle>
+          <DialogTitle>Edit Role/Staff Data</DialogTitle>
         </DialogHeader>
-        <div className="border info">
-          <p>Users Info</p>
+        <div>
           <p>
-            <span>Email</span>
+            <span className="font-bold mr-3">Email:</span>
             {role.user.email}
           </p>
           <p>
-            <span>Name</span>
+            <span className="font-bold mr-3">User Name:</span>
             {role.user.fullName}
           </p>
-          <p>
-            <span>Phone</span>
+          {/* <p> */}
+          {/* <span className='font-bold mr-3'>Phone No:</span>
             {role.user.phone}
-          </p>
-        </div>
-        <div className="border info">
-          <p>Schools Info</p>
+          </p> */}
           <p>
-            <span>School Name</span>
+            <span className="font-bold mr-3">School Name:</span>
             {role.school.name}
           </p>
-          <p>
-            <span>Email</span>
+          {/* <p>
+            <span className='font-bold mr-3'>Email:</span>
             {role.school.email}
           </p>
           <p>
-            <span>address</span>
+            <span className='font-bold mr-3'>Address:</span>
             {role.school.address}
           </p>
           <p>
-            <span>Phone</span>
+            <span className='font-bold mr-3'>School Phone No:</span>
             {role.school.phone}
-          </p>
+          </p> */}
           <Button className={role.school.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}>
             {role.school.status}
           </Button>
@@ -109,7 +103,7 @@ export default function EditRoleModal({ isOpen, onClose, role }: EditRoleModalPr
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={processing}>
+            <Button type="submit" disabled={processing} className="mt-3">
               Save
             </Button>
           </DialogFooter>

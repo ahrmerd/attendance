@@ -1,25 +1,27 @@
-import { Button } from '@/components/ui/button'
-import { Link, router, usePage } from '@inertiajs/react'
-import { Telescope, SchoolIcon, MenuIcon, XIcon } from 'lucide-react'
-import {
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-  DropdownMenuContent,
-  DropdownMenu,
-} from '@/components/ui/dropdown-menu'
-import { SheetTrigger, SheetContent, Sheet } from '@/components/ui/sheet'
+import User from '#models/user'
 import { UserAvatar } from '@/components/icons'
 import { Sidebar } from '@/components/sidebar'
+import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { ThemeToggle, useTheme } from '@/contexts/theme_context'
+import { Link, usePage } from '@inertiajs/react'
+import { MenuIcon } from 'lucide-react'
 import { ReactNode } from 'react'
-import User from '#models/user'
 
 interface AdminLayoutProps {
   children: ReactNode
 }
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const user: User = usePage().props.auth as User
+  const theme = useTheme()
   // const [isSidebarExpanded, setIsSidebarExpanded] = useState(false)
 
   return (
@@ -32,20 +34,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               Attendance
             </span>
           </Link>
-          {/* <div className="relative max-w-md">
-                    <SearchIcon className="absolute w-5 h-5 text-gray-500 -translate-y-1/2 left-3 top-1/2 dark:text-gray-400" />
-                    <Input
-                        className="w-full h-10 pl-10 text-sm bg-gray-100 border border-gray-200 rounded-md focus:border-gray-900 focus:bg-white focus:outline-none dark:border-gray-800 dark:bg-gray-800 dark:text-gray-50 dark:focus:border-gray-50"
-                        placeholder="Search lectures"
-                        type="search"
-                    />
-                </div> */}
         </div>
         <div className="flex items-center gap-4">
-          {/* <Button className="rounded-full" size="icon" variant="ghost">
-                    <BellIcon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                    <span className="sr-only">Notifications</span>
-                </Button> */}
+          <Link href="/myschools/dashboard">
+            <Button>School Management</Button>
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button className="rounded-full" size="icon" variant="ghost">
@@ -60,6 +53,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 <Link href="l">Profile</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem>
+                <ThemeToggle />
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link href="logout" method="post" as="button">

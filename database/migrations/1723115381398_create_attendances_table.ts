@@ -16,7 +16,7 @@ export default class extends BaseSchema {
       table.integer('class_id').unsigned().references('id').inTable('classes').onDelete('SET NULL')
       // table.date('date').notNullable();
       table.timestamp('clock_in', { useTz: true })
-      table.timestamp('clock_out', { useTz: true })
+      table.timestamp('clock_out', { useTz: true }).nullable()
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

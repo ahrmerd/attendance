@@ -1,6 +1,6 @@
+import type { Authenticators } from '@adonisjs/auth/types'
 import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
-import type { Authenticators } from '@adonisjs/auth/types'
 
 export default class SchoolAuthMiddleware {
   redirectTo = '/login'
@@ -18,6 +18,9 @@ export default class SchoolAuthMiddleware {
     if (!role || role.role !== 'admin') {
       return ctx.response.redirect().toRoute('notSchool')
     }
+    // if (!role) {
+    //   return ctx.response.redirect().toRoute('notSchool')
+    // }
     return next()
   }
 }

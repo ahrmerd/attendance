@@ -13,6 +13,8 @@ export default class extends BaseSchema {
       table.string('password').notNullable()
       table.boolean('is_system_admin').defaultTo(false)
 
+      //table.enum('userType',['admin', 'school', 'teacher'])
+
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()
     })

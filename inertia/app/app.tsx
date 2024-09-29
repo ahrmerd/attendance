@@ -4,13 +4,14 @@
 import '../css/app.css'
 import './bootstrap'
 
-import { createRoot } from 'react-dom/client'
-import { createInertiaApp } from '@inertiajs/react'
+import { ThemeProvider } from '@/contexts/theme_context'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
+import { createInertiaApp } from '@inertiajs/react'
+import { createRoot } from 'react-dom/client'
 // import { stardust, initRoutes } from '@ahrmerd/adonis-stardust/client'
 
 // stardust
-const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
+const appName = import.meta.env.VITE_APP_NAME || 'Smart Attend'
 
 createInertiaApp({
   progress: { color: '#5468FF' },
@@ -22,6 +23,10 @@ createInertiaApp({
   },
 
   setup({ el, App, props }) {
-    createRoot(el).render(<App {...props} />)
+    createRoot(el).render(
+      <ThemeProvider>
+        <App {...props} />
+      </ThemeProvider>
+    )
   },
 })
