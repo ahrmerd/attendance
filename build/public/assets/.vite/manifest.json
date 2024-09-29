@@ -1,0 +1,439 @@
+{
+  "_admin_layout-CKLHWd0f.js": {
+    "file": "admin_layout-CKLHWd0f.js",
+    "name": "admin_layout",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_sheet-CEiO1oB5.js",
+      "_school-CJS83_n0.js",
+      "_button-B4OTIyGS.js"
+    ]
+  },
+  "_button-B4OTIyGS.js": {
+    "file": "button-B4OTIyGS.js",
+    "name": "button",
+    "imports": [
+      "inertia/app/app.tsx"
+    ]
+  },
+  "_card-WrUlKoNh.js": {
+    "file": "card-WrUlKoNh.js",
+    "name": "card",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js"
+    ]
+  },
+  "_edit_student_modal-Dab2Plzr.js": {
+    "file": "edit_student_modal-Dab2Plzr.js",
+    "name": "edit_student_modal",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_index-CKWJj8vZ.js",
+      "_input-DqOg99j5.js",
+      "_select-DxLacraJ.js",
+      "_label-DSsEh3nW.js"
+    ]
+  },
+  "_guest_layout-BrC3sgiX.js": {
+    "file": "guest_layout-BrC3sgiX.js",
+    "name": "guest_layout",
+    "imports": [
+      "inertia/app/app.tsx"
+    ]
+  },
+  "_index-Bk9cuW67.js": {
+    "file": "index-Bk9cuW67.js",
+    "name": "index",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js"
+    ]
+  },
+  "_index-CKWJj8vZ.js": {
+    "file": "index-CKWJj8vZ.js",
+    "name": "index",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_sheet-CEiO1oB5.js",
+      "_button-B4OTIyGS.js"
+    ]
+  },
+  "_input-DqOg99j5.js": {
+    "file": "input-DqOg99j5.js",
+    "name": "input",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js"
+    ]
+  },
+  "_label-DSsEh3nW.js": {
+    "file": "label-DSsEh3nW.js",
+    "name": "label",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_index-Bk9cuW67.js",
+      "_button-B4OTIyGS.js"
+    ]
+  },
+  "_lodash-D7_sRmDr.js": {
+    "file": "lodash-D7_sRmDr.js",
+    "name": "lodash",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_sheet-CEiO1oB5.js"
+    ]
+  },
+  "_school-CJS83_n0.js": {
+    "file": "school-CJS83_n0.js",
+    "name": "school",
+    "imports": [
+      "inertia/app/app.tsx"
+    ]
+  },
+  "_school_layout-JKlY_fET.js": {
+    "file": "school_layout-JKlY_fET.js",
+    "name": "school_layout",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_sheet-CEiO1oB5.js",
+      "_school-CJS83_n0.js",
+      "_button-B4OTIyGS.js"
+    ]
+  },
+  "_select-DxLacraJ.js": {
+    "file": "select-DxLacraJ.js",
+    "name": "select",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_sheet-CEiO1oB5.js",
+      "_button-B4OTIyGS.js",
+      "_index-Bk9cuW67.js",
+      "_index-CKWJj8vZ.js"
+    ]
+  },
+  "_sheet-CEiO1oB5.js": {
+    "file": "sheet-CEiO1oB5.js",
+    "name": "sheet",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_index-Bk9cuW67.js"
+    ]
+  },
+  "_table-DVnI7eNv.js": {
+    "file": "table-DVnI7eNv.js",
+    "name": "table",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js"
+    ]
+  },
+  "_trash-2-DR9Mtrq7.js": {
+    "file": "trash-2-DR9Mtrq7.js",
+    "name": "trash-2",
+    "imports": [
+      "inertia/app/app.tsx"
+    ]
+  },
+  "inertia/app/app.tsx": {
+    "file": "app-LdO5xby3.js",
+    "name": "app",
+    "src": "inertia/app/app.tsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "inertia/pages/admin/dashboard.tsx",
+      "inertia/pages/errors/not_found.tsx",
+      "inertia/pages/errors/server_error.tsx",
+      "inertia/pages/home.tsx",
+      "inertia/pages/login.tsx",
+      "inertia/pages/myschools/class_index.tsx",
+      "inertia/pages/myschools/class_students_index.tsx",
+      "inertia/pages/myschools/my_school_dashboard.tsx",
+      "inertia/pages/myschools/school_attendance_index.tsx",
+      "inertia/pages/myschools/staffs_index.tsx",
+      "inertia/pages/not_admin.tsx",
+      "inertia/pages/not_school.tsx",
+      "inertia/pages/register.tsx",
+      "inertia/pages/roles/roles_index.tsx",
+      "inertia/pages/schools/schools_index.tsx",
+      "inertia/pages/students/students_index.tsx",
+      "inertia/pages/users/users_index.tsx"
+    ],
+    "css": [
+      "app-DSt0QmNK.css"
+    ]
+  },
+  "inertia/pages/admin/dashboard.tsx": {
+    "file": "dashboard-CXs-sZYc.js",
+    "name": "dashboard",
+    "src": "inertia/pages/admin/dashboard.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_card-WrUlKoNh.js",
+      "_admin_layout-CKLHWd0f.js",
+      "_sheet-CEiO1oB5.js",
+      "_index-Bk9cuW67.js",
+      "_school-CJS83_n0.js"
+    ]
+  },
+  "inertia/pages/errors/not_found.tsx": {
+    "file": "not_found-BctL65lX.js",
+    "name": "not_found",
+    "src": "inertia/pages/errors/not_found.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx"
+    ]
+  },
+  "inertia/pages/errors/server_error.tsx": {
+    "file": "server_error-Dpn4s1ae.js",
+    "name": "server_error",
+    "src": "inertia/pages/errors/server_error.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx"
+    ]
+  },
+  "inertia/pages/home.tsx": {
+    "file": "home-BeSbV5Q0.js",
+    "name": "home",
+    "src": "inertia/pages/home.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_card-WrUlKoNh.js",
+      "_school-CJS83_n0.js"
+    ]
+  },
+  "inertia/pages/login.tsx": {
+    "file": "login-D5YFf0i6.js",
+    "name": "login",
+    "src": "inertia/pages/login.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_input-DqOg99j5.js",
+      "_card-WrUlKoNh.js",
+      "_label-DSsEh3nW.js",
+      "_guest_layout-BrC3sgiX.js",
+      "_index-Bk9cuW67.js"
+    ]
+  },
+  "inertia/pages/myschools/class_index.tsx": {
+    "file": "class_index-CbKs10wl.js",
+    "name": "class_index",
+    "src": "inertia/pages/myschools/class_index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_index-CKWJj8vZ.js",
+      "_input-DqOg99j5.js",
+      "_label-DSsEh3nW.js",
+      "_select-DxLacraJ.js",
+      "_lodash-D7_sRmDr.js",
+      "_table-DVnI7eNv.js",
+      "_school_layout-JKlY_fET.js",
+      "_sheet-CEiO1oB5.js",
+      "_index-Bk9cuW67.js",
+      "_school-CJS83_n0.js"
+    ]
+  },
+  "inertia/pages/myschools/class_students_index.tsx": {
+    "file": "class_students_index-DK_qq98k.js",
+    "name": "class_students_index",
+    "src": "inertia/pages/myschools/class_students_index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_edit_student_modal-Dab2Plzr.js",
+      "_lodash-D7_sRmDr.js",
+      "_button-B4OTIyGS.js",
+      "_input-DqOg99j5.js",
+      "_table-DVnI7eNv.js",
+      "_school_layout-JKlY_fET.js",
+      "_index-CKWJj8vZ.js",
+      "_sheet-CEiO1oB5.js",
+      "_index-Bk9cuW67.js",
+      "_select-DxLacraJ.js",
+      "_label-DSsEh3nW.js",
+      "_school-CJS83_n0.js"
+    ]
+  },
+  "inertia/pages/myschools/my_school_dashboard.tsx": {
+    "file": "my_school_dashboard-DA1n9atS.js",
+    "name": "my_school_dashboard",
+    "src": "inertia/pages/myschools/my_school_dashboard.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_card-WrUlKoNh.js",
+      "_school_layout-JKlY_fET.js",
+      "_sheet-CEiO1oB5.js",
+      "_index-Bk9cuW67.js",
+      "_school-CJS83_n0.js"
+    ]
+  },
+  "inertia/pages/myschools/school_attendance_index.tsx": {
+    "file": "school_attendance_index-BF7Kp7ur.js",
+    "name": "school_attendance_index",
+    "src": "inertia/pages/myschools/school_attendance_index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_school_layout-JKlY_fET.js",
+      "_table-DVnI7eNv.js",
+      "_input-DqOg99j5.js",
+      "_lodash-D7_sRmDr.js",
+      "_sheet-CEiO1oB5.js",
+      "_button-B4OTIyGS.js",
+      "_index-Bk9cuW67.js",
+      "_school-CJS83_n0.js"
+    ]
+  },
+  "inertia/pages/myschools/staffs_index.tsx": {
+    "file": "staffs_index-DpAmirAw.js",
+    "name": "staffs_index",
+    "src": "inertia/pages/myschools/staffs_index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_table-DVnI7eNv.js",
+      "_index-CKWJj8vZ.js",
+      "_label-DSsEh3nW.js",
+      "_select-DxLacraJ.js",
+      "_input-DqOg99j5.js",
+      "_school_layout-JKlY_fET.js",
+      "_trash-2-DR9Mtrq7.js",
+      "_sheet-CEiO1oB5.js",
+      "_index-Bk9cuW67.js",
+      "_school-CJS83_n0.js"
+    ]
+  },
+  "inertia/pages/not_admin.tsx": {
+    "file": "not_admin-BzGpo6E7.js",
+    "name": "not_admin",
+    "src": "inertia/pages/not_admin.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_card-WrUlKoNh.js"
+    ]
+  },
+  "inertia/pages/not_school.tsx": {
+    "file": "not_school-D3ZXDqHw.js",
+    "name": "not_school",
+    "src": "inertia/pages/not_school.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_card-WrUlKoNh.js"
+    ]
+  },
+  "inertia/pages/register.tsx": {
+    "file": "register-BtXxiWA2.js",
+    "name": "register",
+    "src": "inertia/pages/register.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_input-DqOg99j5.js",
+      "_card-WrUlKoNh.js",
+      "_label-DSsEh3nW.js",
+      "_guest_layout-BrC3sgiX.js",
+      "_index-Bk9cuW67.js"
+    ]
+  },
+  "inertia/pages/roles/roles_index.tsx": {
+    "file": "roles_index-FjTGQMQS.js",
+    "name": "roles_index",
+    "src": "inertia/pages/roles/roles_index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_table-DVnI7eNv.js",
+      "_button-B4OTIyGS.js",
+      "_admin_layout-CKLHWd0f.js",
+      "_lodash-D7_sRmDr.js",
+      "_input-DqOg99j5.js",
+      "_index-CKWJj8vZ.js",
+      "_label-DSsEh3nW.js",
+      "_select-DxLacraJ.js",
+      "_trash-2-DR9Mtrq7.js",
+      "_sheet-CEiO1oB5.js",
+      "_index-Bk9cuW67.js",
+      "_school-CJS83_n0.js"
+    ]
+  },
+  "inertia/pages/schools/schools_index.tsx": {
+    "file": "schools_index-ChrHDtj5.js",
+    "name": "schools_index",
+    "src": "inertia/pages/schools/schools_index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_table-DVnI7eNv.js",
+      "_button-B4OTIyGS.js",
+      "_admin_layout-CKLHWd0f.js",
+      "_input-DqOg99j5.js",
+      "_select-DxLacraJ.js",
+      "_index-CKWJj8vZ.js",
+      "_label-DSsEh3nW.js",
+      "_sheet-CEiO1oB5.js",
+      "_index-Bk9cuW67.js",
+      "_school-CJS83_n0.js"
+    ]
+  },
+  "inertia/pages/students/students_index.tsx": {
+    "file": "students_index-7d0f_QYX.js",
+    "name": "students_index",
+    "src": "inertia/pages/students/students_index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_button-B4OTIyGS.js",
+      "_table-DVnI7eNv.js",
+      "_lodash-D7_sRmDr.js",
+      "_input-DqOg99j5.js",
+      "_school_layout-JKlY_fET.js",
+      "_edit_student_modal-Dab2Plzr.js",
+      "_sheet-CEiO1oB5.js",
+      "_index-Bk9cuW67.js",
+      "_school-CJS83_n0.js",
+      "_index-CKWJj8vZ.js",
+      "_select-DxLacraJ.js",
+      "_label-DSsEh3nW.js"
+    ]
+  },
+  "inertia/pages/users/users_index.tsx": {
+    "file": "users_index-CBJ-qKjL.js",
+    "name": "users_index",
+    "src": "inertia/pages/users/users_index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "inertia/app/app.tsx",
+      "_table-DVnI7eNv.js",
+      "_button-B4OTIyGS.js",
+      "_admin_layout-CKLHWd0f.js",
+      "_index-CKWJj8vZ.js",
+      "_input-DqOg99j5.js",
+      "_label-DSsEh3nW.js",
+      "_sheet-CEiO1oB5.js",
+      "_index-Bk9cuW67.js",
+      "_lodash-D7_sRmDr.js",
+      "_school-CJS83_n0.js"
+    ]
+  }
+}
