@@ -43,7 +43,7 @@ export default class StudentsController {
       return student
     }
     return response
-      .status(412)
+      .status(422)
       .send({ errors: [{ message: 'could not add students. The Class could not be found' }] })
   }
 
@@ -56,7 +56,7 @@ export default class StudentsController {
     if (students.length > 0) {
       return students[0]
     }
-    return response.status(412).send({ errors: [{ message: 'No Student Found' }] })
+    return response.status(422).send({ errors: [{ message: 'No Student Found' }] })
   }
 
   async update({ request }: HttpContext) {
